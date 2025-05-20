@@ -1,0 +1,711 @@
+﻿<UserControl x:Class="WPFApostar.UserControls.Chance.ConfirmLotteryUC"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFApostar.UserControls.Chance"
+      mc:Ignorable="d" 
+      d:DesignHeight="1920" d:DesignWidth="1080"
+     >
+
+    <Viewbox Stretch="Uniform">
+        <Grid Width="1080" Height="1920">
+
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/Backgrounds/bgGray.png"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+        <Grid
+                Grid.Row="0">
+
+            <Image Source="/Images/Others/IcoApostar.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top" Height="88" Width="304" Margin="0,10,0,0"/>
+
+            <TextBlock 
+            x:Name="tbTimer"
+            FontSize="45"
+            Foreground="Black"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="0,10,35,0" Height="60" Width="126" Grid.Column="1"/>
+
+        </Grid>
+
+        <Grid
+            Grid.Row="1">
+
+
+            <Image Source="/Images/SuperChance/Backgrounds/BgApuesta.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="1612" Width="944" Margin="79,24,0,0"/>
+
+            <Image Source="/Images/SuperChance/Others/LogoChance.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="105" Width="262" Margin="398,-50,0,0"/>
+
+            <Image Source="/Images/SuperChance/Others/TxtLoteriasJugafas.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" 
+                   Height="105" 
+                   Width="180" 
+                   Margin="128,173,0,0"/>
+
+            <Image Source="/Images/SuperChance/Others/TxtValorT.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="50" Width="244" Margin="202,1194,0,0"/>
+
+            <Image Source="/Images/SuperChance/Others/TxtIva.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="37" Width="94" Margin="202,1303,0,0"/>
+
+            <Label 
+                   HorizontalAlignment="Left"
+                   Margin="670,1288,0,0" 
+                   VerticalAlignment="Top" 
+                   HorizontalContentAlignment="Center"
+                   Foreground="White"
+                   x:Name="Iva"
+                Content=""
+                   FontSize="50" Width="252" Height="66"/>
+
+            <Label 
+                   HorizontalAlignment="Left"
+                   Margin="670,1175,0,0" 
+                   VerticalAlignment="Top" 
+                   Foreground="White"
+                   Content=""
+                   HorizontalContentAlignment="Center"
+                   x:Name="Valor"
+                   FontSize="50" Width="258"/>
+
+
+            <Image Source="/Images/SuperChance/Others/TxtValorPagar.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="44" Width="410" Margin="202,1414,0,0"/>
+
+
+            <Label 
+                   HorizontalAlignment="Left"
+                   Margin="664,1402,0,0" 
+                   VerticalAlignment="Top" 
+                   HorizontalContentAlignment="Center"
+                   Foreground="White"
+                   Content=""
+                   x:Name="ValorT"
+                   FontSize="50" Height="68" Width="264" Background="{x:Null}"/>
+
+            <Image Source="/Images/SuperChance/Buttons/BtnConfirmarA.png"
+                   HorizontalAlignment="Left"
+                   TouchDown="Btn_Continue"
+                   VerticalAlignment="Top" Height="72" Width="324" Margin="596,1591,0,0"/>
+
+            <Image Source="/Images/SuperChance/Buttons/BtnCancelarA.png"
+                   HorizontalAlignment="Left"
+                   TouchDown="Btn_Cancel"
+                   VerticalAlignment="Top" Height="72" Width="324" Margin="156,1591,0,0"/>
+
+            <Image Source="/WPFApostar;component/Images/SuperChance/Others/TxtResumen.png"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top" 
+                Height="42" 
+                Width="180" 
+                Margin="439,435,0,0"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="104,510,0,0"
+                     TextWrapping="Wrap"
+                     Text="#"
+                     FontSize="40"
+                     VerticalAlignment="Top"
+                     Width="134"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="263,510,0,0"
+                     TextWrapping="Wrap"
+                     Text="Directo"
+                     FontSize="40"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="446,510,0,0"
+                     TextWrapping="Wrap"
+                     Text="Combinado"
+                     FontSize="40"
+                     VerticalAlignment="Top"
+                     Width="214"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="707,510,0,0"
+                     TextWrapping="Wrap"
+                     Text="Pata"
+                     FontSize="40"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="841,510,0,0"
+                     TextWrapping="Wrap"
+                     Text="Uña"
+                     FontSize="40"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <!--Data Numeros-->
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="104,600,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     VerticalAlignment="Top"
+                     Width="134"
+                     x:Name="Num1"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="104,670,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     VerticalAlignment="Top"
+                     Width="134"
+                     x:Name="Num2"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="104,740,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     VerticalAlignment="Top"
+                     Width="134"
+                     x:Name="Num3"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="104,806,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     VerticalAlignment="Top"
+                     Width="134"
+                     x:Name="Num4"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="104,882,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     VerticalAlignment="Top"
+                     Width="134"
+                     x:Name="Num5"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="104,956,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     VerticalAlignment="Top"
+                     Width="134"
+                     x:Name="Num6"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="104,1030,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     VerticalAlignment="Top"
+                     Width="134"
+                     x:Name="Num7"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+
+            <!--End Data Numeros-->
+
+            <!--Data Directos-->
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="263,600,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Directo1"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="263,670,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Directo2"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="263,740,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Directo3"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="263,812,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Directo4"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="263,882,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Directo5"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="263,956,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Directo6"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="263,1030,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Directo7"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <!--End Data Directos-->
+
+            <!--Data Combinados-->
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="476,600,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Combinado1"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="476,670,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Combinado2"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="476,740,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Combinado3"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="476,806,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Combinado4"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="476,882,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Combinado5"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="476,956,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Combinado6"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="476,1030,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Combinado7"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+
+            <!--End Data Combinados-->
+
+            <!--Data Pata-->
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="670,600,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Pata1"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="670,670,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Pata2"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="670,740,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Pata3"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="670,806,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Pata4"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="670,882,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Pata5"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="670,956,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Pata6"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="670,1030,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Pata7"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <!--End Data Pata-->
+
+            <!--Data Uña-->
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="841,600,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Una1"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="841,670,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Una2"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="841,740,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Una3"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="841,806,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Una4"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="841,882,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Una5"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="841,956,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Una6"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <TextBox HorizontalAlignment="Left" 
+                     Margin="841,1030,0,0"
+                     TextWrapping="Wrap"
+                     Text=""
+                     FontSize="40"
+                     x:Name="Una7"
+                     VerticalAlignment="Top"
+                     Width="154"
+                     Foreground="White"
+                     Height="48" Background="{x:Null}" 
+                     BorderBrush="{x:Null}"
+                     SelectionBrush="{x:Null}"/>
+
+            <!--End Data Uña-->
+
+
+
+            <ListView 
+                    x:Name="lvLotteries"
+                   
+                    
+                    ItemsSource="{Binding}"            
+                    SelectionMode="Multiple" Background="{x:Null}" Margin="369,71,110,1342">
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="4"
+                                  VerticalAlignment="Top"
+                                 HorizontalAlignment="Center"/>
+
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid 
+                                       
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Margin="0,10,10,0"
+                                 x:Name="LotterieSelected"
+                                Width="100"
+                                Height="100">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0"                      
+                                        x:Name="LotteriesSelected"
+                                      >
+
+                                <Grid.Background>
+
+                                    <ImageBrush 
+                                            ImageSource="{Binding ImageData}"                                            
+                                            Stretch="Fill"                                      
+                                            />
+                                </Grid.Background>
+
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </Grid>
+
+        </Grid>
+    </Viewbox>
+</UserControl>

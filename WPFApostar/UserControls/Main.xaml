@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="WPFApostar.UserControls.Main"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFApostar.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="1920" d:DesignWidth="1080"
+    >
+
+    <Viewbox Stretch="Uniform">
+        <Grid Width="1080" Height="1920" MouseDown="Grid_MouseDown">
+            <MediaElement 
+                   
+                      Loaded="mediaElement_MediaEnded"
+                      Visibility="Visible"
+                     LoadedBehavior="Play"
+                     UnloadedBehavior="Stop"
+                      MediaEnded="mediaElement_MediaEnded" 
+                     />
+
+            <TextBlock Text="Toca la pantalla para continuar"
+           HorizontalAlignment="Center" VerticalAlignment="Top"
+           FontSize="60" FontWeight="Bold"  Foreground="#60FFFFFF"
+           Panel.ZIndex="1" Height="104" Width="888" Margin="0,1696,0,0"
+                    />
+        </Grid>
+    </Viewbox>
+</UserControl>

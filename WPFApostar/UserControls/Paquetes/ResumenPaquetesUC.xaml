@@ -1,0 +1,164 @@
+﻿<UserControl x:Class="WPFApostar.UserControls.Paquetes.ResumenPaquetesUC"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFApostar.UserControls.Paquetes"
+     mc:Ignorable="d" 
+      d:DesignHeight="1920" d:DesignWidth="1080">
+
+    <Viewbox Stretch="Uniform">
+        <Grid Width="1080" Height="1920">
+
+
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/Backgrounds/bgGray.png"/>
+            </Grid.Background>
+
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="350"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="150" />
+            </Grid.RowDefinitions>
+
+
+            <Grid Grid.Row="0">
+                <TextBlock 
+            x:Name="tbTimer"
+            FontSize="45"
+            Foreground="Black"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="0,10,35,0" Height="60" Width="126" Grid.Column="1"/>
+
+
+
+
+
+                <Image Source="/Images/Others/IcoApostar.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top" Height="208" Width="540" Margin="0,56,0,0"/>
+
+
+            </Grid>
+
+
+
+            <Grid Grid.Row="1">
+
+
+                <Image Source="/Images/Backgrounds/BgPay.png"
+                   VerticalAlignment="Top" Height="1248" Margin="111,91,111,0"/>
+
+
+                <Image x:Name="ImageData" Height="144" VerticalAlignment="Top"  Margin="362,10,354,0" />
+
+                <TextBlock Text="Confirma tu compra"
+             
+               Margin="232,230,224,0"
+               TextAlignment="Center"
+               VerticalAlignment="Top"
+               Height="78" 
+               TextWrapping="wrap" FontSize="60" FontFamily="Yu Gothic UI Semibold" Foreground="White" Background="{x:Null}"/>
+
+
+                <TextBlock Text="Celular"          
+               Margin="304,363,304,0"
+               TextAlignment="Center"
+               VerticalAlignment="Top"
+               Height="60" 
+               TextWrapping="wrap" FontSize="45" FontFamily="Yu Gothic UI Semibold" Foreground="White" Background="{x:Null}"/>
+
+
+
+                <TextBlock Text="Paquete"          
+               Margin="310,634,298,0"
+               TextAlignment="Center"
+               VerticalAlignment="Top"
+               Height="76" 
+               TextWrapping="wrap" FontSize="45" FontFamily="Yu Gothic UI Semibold" Foreground="White" Background="{x:Null}" />
+
+
+                <TextBlock Text="Valor"          
+               Margin="310,1035,298,0"
+               TextAlignment="Center"
+               VerticalAlignment="Top"
+               Height="92" 
+               TextWrapping="wrap" FontSize="45" FontFamily="Yu Gothic UI Semibold" Foreground="White" Background="{x:Null}" />
+
+
+
+                <TextBlock Text="" 
+               x:Name="LblCelular"
+               Margin="236,464,224,0"
+               VerticalAlignment="Top"
+               TextAlignment="Center"      
+               TextWrapping="Wrap"
+              Foreground="#ffb80f"
+               Height="95" FontSize="65" FontFamily="Yu Gothic UI Semibold" Background="{x:Null}" />
+
+
+                <TextBlock Text="" 
+               x:Name="INFO"
+               Margin="232,733,232,0"
+               VerticalAlignment="Top"
+                        TextAlignment="Center" 
+                     TextWrapping="Wrap"
+               Background="{x:Null}"
+               Height="220" FontSize="40" FontFamily="Yu Gothic UI Semibold" Foreground="#ffb80f" RenderTransformOrigin="0.544,-0.2"   />
+
+
+
+
+
+                <TextBlock Text=""
+               HorizontalAlignment="Left" 
+               x:Name="Precio"
+               Margin="258,1132,0,0"
+               VerticalAlignment="Top"
+               TextAlignment="Center" 
+                TextWrapping="Wrap"
+               Height="122" 
+               Width="576" FontSize="65" FontFamily="Yu Gothic UI Semibold" Foreground="#ffb80f " Background="{x:Null}"/>
+
+
+                <Image Source="/Images/Others/ImgLinea.png"
+                   HorizontalAlignment="Center"
+               TouchDown="BtnCancelar_TouchDown"
+                   VerticalAlignment="Top" Width="616" Height="28" Margin="0,993,0,0"/>
+                <Image Source="/Images/Others/ImgLinea.png"
+               TouchDown="BtnCancelar_TouchDown"
+                   VerticalAlignment="Top" Height="28" Margin="232,336,232,0"/>
+                <Image Source="/Images/Others/ImgLinea.png"
+                   HorizontalAlignment="Center"
+               TouchDown="BtnCancelar_TouchDown"
+                   VerticalAlignment="Top" Width="616" Height="28" Margin="0,598,0,0"/>
+
+
+            </Grid>
+
+
+
+
+
+
+
+
+            <Image Source="/Images/Buttons/btnCancelar.png"
+           TouchDown="BtnCancelar_TouchDown"
+VerticalAlignment="Top" Height="80" Margin="165,1307,536,0" Grid.Row="1"/>
+
+            <Image Source="/Images/Buttons/btnContinuar.png" 
+           TouchDown="BtnContinuar_TouchDown"
+VerticalAlignment="Top" Height="76" Margin="594,1311,157,0" RenderTransformOrigin="0.457,0.026" Grid.Row="1"/>
+
+
+
+
+
+
+
+        </Grid>
+    </Viewbox>
+</UserControl>

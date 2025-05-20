@@ -1,0 +1,169 @@
+﻿<UserControl x:Class="WPFApostar.UserControls.Betplay.RechargeUC"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFApostar.UserControls.Betplay"
+      mc:Ignorable="d" 
+      d:DesignHeight="1920" d:DesignWidth="1080"
+      >
+
+    <Viewbox Stretch="Uniform">
+        <Grid Width="1080" Height="1920">
+            <Grid.Background>
+            <ImageBrush ImageSource="/Images/Backgrounds/bgGray.png"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="400" />
+        </Grid.RowDefinitions>
+
+        <Grid
+                Grid.Row="0">
+
+            <Image Source="/Images/Others/IcoApostar.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top" Height="208" Width="540" Margin="0,56,0,0"/>
+
+            <Image Source="/Images/Others/TxtDivierteteGris.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top" Height="124" Width="672" Margin="0,309,0,0"/>
+
+            <TextBlock 
+            x:Name="tbTimer"
+            FontSize="45"
+            Foreground="White"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="0,10,35,0" Height="60" Width="126" Grid.Column="1"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="10,5,-10,395" Grid.RowSpan="2">
+
+            <Image Source="/Images/Backgrounds/BgData.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" Height="1161" Width="648"/>
+
+            <Image Source="/Images/Others/LogoBetPlay.png" 
+                   Margin="0,-20,0,0"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top" Height="134" Width="298"/>
+
+            <Image Source="/Images/Others/InputTxt.png" 
+                   Margin="258,196,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="59" Width="578"/>
+
+            <Image Source="/Images/Others/TxtValorRecarga.png" 
+                   Margin="0,132,0,0"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top" Height="42" Width="376"/>
+
+            <Image Source="/Images/Others/txtingrese.png" 
+                   Margin="377,208,0,0"
+                   Visibility="Hidden"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="38" Width="371"/>
+
+            <Image Source="/Images/keyboard/0.png"
+                   HorizontalAlignment="Center"
+                   TouchDown="Keyboard_TouchDown"
+                   Tag="0"
+                   VerticalAlignment="Top" Height="104" Width="116" Margin="0,760,0,0"/>
+
+            <Image Source="/Images/keyboard/1.png"
+                   HorizontalAlignment="Left"
+                   TouchDown="Keyboard_TouchDown"
+                   Tag="1"
+                   VerticalAlignment="Top" Height="105" Width="117" Margin="331,346,0,0"/>
+
+            <Image Source="/Images/keyboard/2.png"
+                   HorizontalAlignment="Left"
+                    TouchDown="Keyboard_TouchDown"
+                   Tag="2"
+                   VerticalAlignment="Top" Height="105" Width="116" Margin="479,346,0,0"/>
+
+            <Image Source="/Images/keyboard/3.png"
+                   HorizontalAlignment="Left"
+                    TouchDown="Keyboard_TouchDown"
+                   Tag="3"
+                   VerticalAlignment="Top" Height="105" Width="117" Margin="650,346,0,0"/>
+
+            <Image Source="/Images/keyboard/4.png"
+                   HorizontalAlignment="Left"
+                    TouchDown="Keyboard_TouchDown"
+                   Tag="4"
+                   VerticalAlignment="Top" Height="105" Width="117" Margin="331,485,0,0"/>
+
+            <Image Source="/Images/keyboard/5.png"
+                   HorizontalAlignment="Left"
+                    TouchDown="Keyboard_TouchDown"
+                   Tag="5"
+                   VerticalAlignment="Top" Height="105" Width="116" Margin="486,485,0,0"/>
+
+            <Image Source="/Images/keyboard/6.png"
+                   HorizontalAlignment="Left"
+                    TouchDown="Keyboard_TouchDown"
+                   Tag="6"
+                   VerticalAlignment="Top" Height="105" Width="117" Margin="649,485,0,0"/>
+
+            <Image Source="/Images/keyboard/7.png"
+                    TouchDown="Keyboard_TouchDown"
+                   HorizontalAlignment="Left"
+                   Tag="7"
+                   VerticalAlignment="Top" Height="104" Width="118" Margin="331,627,0,0"/>
+
+            <Image Source="/Images/keyboard/8.png"
+                   HorizontalAlignment="Left"
+                   Tag="8"
+                    TouchDown="Keyboard_TouchDown"
+                   VerticalAlignment="Top" Height="104" Width="117" Margin="486,627,0,0"/>
+
+            <Image Source="/Images/keyboard/9.png"
+                   HorizontalAlignment="Left"
+                   Tag="9"
+                    TouchDown="Keyboard_TouchDown"
+                   VerticalAlignment="Top" Height="104" Width="116" RenderTransformOrigin="0.504,0.458" Margin="648,627,0,0"/>
+
+            <Image Source="/Images/keyboard/Borrar.png"
+                   HorizontalAlignment="Left"
+                   Tag="Borrar"
+                   TouchDown="Btn_DeleteTouchDown"
+                   VerticalAlignment="Top" Height="104" Width="117" Margin="338,760,0,0"/>
+
+            <Image Source="/Images/keyboard/All.png"
+                   HorizontalAlignment="Left"
+                    TouchDown="Btn_DeleteAllTouchDown"
+                   Tag="All"
+                   VerticalAlignment="Top" Height="104" Width="117" Margin="661,760,0,0"/>
+
+            <Image Source="/Images/Buttons/btnCancelar.png"
+                   HorizontalAlignment="Left"
+                   TouchDown="Btn_CancelarTouchDown"
+                   VerticalAlignment="Top" Height="105" Width="227" Margin="263,932,0,0"/>
+
+            <Image Source="/Images/Buttons/btnContinuar.png" 
+                   Margin="587,932,0,0"
+                   HorizontalAlignment="Left"
+                   TouchDown="Btn_ContinuarTouchDown"
+                   VerticalAlignment="Top" Height="78" Width="227"/>
+
+            <TextBox x:Name="TxtMonto"
+                    HorizontalAlignment="Left" 
+                     Height="58" 
+                     Text="{Binding Val,StringFormat={}{0:C0},UpdateSourceTrigger=PropertyChanged}"
+                     Margin="271,196,0,0" 
+                     TextWrapping="Wrap"
+                     TextChanged="txtVal_TextChanged"
+                     VerticalAlignment="Top"
+                     Width="543" FontSize="40" FontFamily="Tahoma" Background="{x:Null}"/>
+
+
+
+        </Grid>
+        </Grid>
+    </Viewbox>
+</UserControl>

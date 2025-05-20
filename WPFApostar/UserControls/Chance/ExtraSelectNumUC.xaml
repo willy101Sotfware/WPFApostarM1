@@ -1,0 +1,318 @@
+﻿<UserControl x:Class="WPFApostar.UserControls.Chance.ExtraSelectNumUC"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFApostar.UserControls.Chance"
+      mc:Ignorable="d" 
+      d:DesignHeight="1920" 
+      d:DesignWidth="1080">
+
+    <Viewbox Stretch="Uniform">
+        <Grid Width="1080" Height="1920">
+
+            <Grid.Background>
+            <ImageBrush ImageSource="/Images/Backgrounds/bgGray.png"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid
+                Grid.Row="0">
+
+            <Image Source="/Images/Others/IcoApostar.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top" Height="116" Width="380" Margin="0,56,0,0"/>
+
+            <TextBlock 
+            x:Name="tbTimer"
+            FontSize="45"
+            Foreground="White"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="0,10,35,0" Height="60" Width="126" Grid.Column="1"/>
+
+        </Grid>
+
+        <Grid
+            Grid.Row="1">
+
+            <Image Source="/Images/SuperChance/Backgrounds/BgApuesta.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="1528" Width="930" Margin="97,-251,0,0"/>
+
+            <Image Source="/Images/SuperChance/Others/LogoChance.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top" Height="105" Width="262" Margin="0,-298,0,0"/>
+
+
+            <Image Source="/Images/SuperChance/Others/InputNum.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="132" Width="143" Margin="220,-84,0,0"/>
+
+            <Image Source="/Images/SuperChance/Others/InputNum.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="132" Width="143" Margin="394,-84,0,0"/>
+
+            <Image Source="/Images/SuperChance/Others/InputNum.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="132" Width="142" Margin="570,-84,0,0"/>
+
+            <Image Source="/Images/SuperChance/Others/InputNum.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="132" Width="142" Margin="744,-84,0,0"/>
+
+            <TextBlock 
+                HorizontalAlignment="Left" 
+                Margin="248,-64,0,0" 
+                TextWrapping="Wrap"
+                GotFocus="Focus_Num1"
+                Text="9" 
+                TextAlignment="Center"
+                VerticalAlignment="Top"
+                FontSize="70"
+                x:Name="Num1" Width="74"
+                />
+
+            <TextBlock 
+                HorizontalAlignment="Left" 
+                Margin="425,-64,0,0" 
+                TextWrapping="Wrap"
+                Text="9" 
+                GotFocus="Focus_Num2"
+                TextAlignment="Center"
+                VerticalAlignment="Top"
+                FontSize="70"
+                x:Name="Num2"
+                Width="74"
+                />
+
+            <TextBlock 
+                HorizontalAlignment="Left" 
+                Margin="599,-64,0,0" 
+                TextWrapping="Wrap"
+                Text="9" 
+                GotFocus="Focus_Num3"
+                TextAlignment="Center"
+                VerticalAlignment="Top"
+                FontSize="70"
+                x:Name="Num3"
+                Width="74"
+                />
+
+            <TextBlock 
+                HorizontalAlignment="Left" 
+                Margin="773,-64,0,0" 
+                TextWrapping="Wrap"
+                GotFocus="Focus_Num4"
+                Text="9" 
+                TextAlignment="Center"
+                VerticalAlignment="Top"
+                FontSize="70"
+                x:Name="Num4"
+                Width="74"
+                />
+
+            <Image Source="/Images/SuperChance/Others/TxtDigitaNumero.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="54" Width="674" Margin="142,-174,0,0"/>
+
+            <Image Source="/Images/SuperChance/Buttons/BtnNumeroAleatorio.png"
+                   HorizontalAlignment="Center"
+                   TouchDown="Btn_NumRandom"
+                   VerticalAlignment="Top" Height="72" Width="324" Margin="0,100,0,0"/>
+
+
+            <Image Source="/Images/SuperChance/Others/TxtDerecho.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="34" Width="142" Margin="192,192,0,0"/>
+
+
+
+            <Image Source="/Images/SuperChance/Others/TxtCombinado.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="38" Width="174" Margin="599,194,0,0"/>
+
+
+            <Image Source="/Images/SuperChance/Others/TxtCuna.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="24" Width="129" Margin="192,324,0,0"/>
+
+            <Image Source="/Images/SuperChance/Others/TxtCifra.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="24" Width="129" Margin="599,324,0,0"/>
+
+
+            <Image Source="/Images/SuperChance/Backgrounds/BgValueA.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="64" Width="306" Margin="192,242,0,0"/>
+
+            <Image Source="/Images/SuperChance/Backgrounds/BgValueA.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="64" Width="306" Margin="599,242,0,0"/>
+
+            <Image Source="/Images/SuperChance/Backgrounds/BgValueA.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="64" Width="306" Margin="192,378,0,0"/>
+
+            <Image Source="/Images/SuperChance/Backgrounds/BgValueA.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="64" Width="306" Margin="599,378,0,0"/>
+
+            <TextBlock 
+                HorizontalAlignment="Left" 
+                Margin="239,242,0,0" 
+                TextWrapping="Wrap"
+                Text="2000" 
+                GotFocus="Focus_Derecho"
+                TextAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="36"
+                x:Name="TxtValorDerecho" Width="249" Height="42"
+                />
+
+
+            <TextBlock 
+                HorizontalAlignment="Left" 
+                Margin="648,242,0,0" 
+                TextWrapping="Wrap"
+                Text="2000" 
+                GotFocus="Focus_Combinado"
+                TextAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="36"
+                x:Name="TxtValorCombinado" Width="249" Height="42"
+                />
+
+            <TextBlock 
+                HorizontalAlignment="Left" 
+                Margin="239,378,0,0" 
+                TextWrapping="Wrap"
+                Text="2000" 
+                GotFocus="Focus_Cuna"
+                TextAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="36"
+                x:Name="TxtValorCuna" Width="249" Height="42"
+                />
+
+
+            <TextBlock 
+                HorizontalAlignment="Left" 
+                Margin="648,378,0,0" 
+                TextWrapping="Wrap"
+                Text="2000" 
+                GotFocus="Focus_Cifra"
+                TextAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="36"
+                x:Name="TxtValorCifra" Width="249" Height="42"
+                />
+
+            <Image Source="/Images/SuperChance/Keyboard/0.png" 
+                Margin="497,752,0,0"
+                HorizontalAlignment="Left"
+                TouchDown="Keyboard_TouchDown"
+                Tag="0"
+                VerticalAlignment="Top" Height="80" Width="94"/>
+            <Image Source="/Images/SuperChance/Keyboard/1.png" 
+                Margin="394,658,0,0"
+                HorizontalAlignment="Left"
+                TouchDown="Keyboard_TouchDown"
+                Tag="1"
+                VerticalAlignment="Top" Height="80" Width="94"/>
+            <Image Source="/Images/SuperChance/Keyboard/2.png" 
+                Margin="497,658,0,0"
+                HorizontalAlignment="Left"
+                TouchDown="Keyboard_TouchDown"
+                Tag="2"
+                VerticalAlignment="Top" Height="80" Width="94"/>
+            <Image Source="/Images/SuperChance/Keyboard/3.png" 
+                Margin="592,658,0,0"
+                HorizontalAlignment="Left"
+                TouchDown="Keyboard_TouchDown"
+                Tag="3"
+                VerticalAlignment="Top" Height="80" Width="93"/>
+            <Image Source="/Images/SuperChance/Keyboard/4.png" 
+                Margin="394,564,0,0"
+                HorizontalAlignment="Left"
+                TouchDown="Keyboard_TouchDown"
+                Tag="4"
+                VerticalAlignment="Top" Height="80" Width="94"/>
+            <Image Source="/Images/SuperChance/Keyboard/5.png" 
+                Margin="497,564,0,0"
+                HorizontalAlignment="Left"
+                TouchDown="Keyboard_TouchDown"
+                Tag="5"
+                VerticalAlignment="Top" Height="80" Width="94"/>
+
+            <Image Source="/Images/SuperChance/Keyboard/6.png" 
+                Margin="592,564,0,0"
+                HorizontalAlignment="Left"
+                TouchDown="Keyboard_TouchDown"
+                Tag="6"
+                VerticalAlignment="Top" Height="80" Width="93"/>
+
+            <Image Source="/Images/SuperChance/Keyboard/7.png" 
+                Margin="394,466,0,0"
+                TouchDown="Keyboard_TouchDown"
+                HorizontalAlignment="Left"
+                Tag="7"
+                VerticalAlignment="Top" Height="80" Width="94"/>
+
+            <Image Source="/Images/SuperChance/Keyboard/8.png" 
+                Margin="497,466,0,0"
+                HorizontalAlignment="Left"
+                Tag="8"
+                TouchDown="Keyboard_TouchDown"
+                VerticalAlignment="Top" Height="80" Width="94"/>
+
+            <Image Source="/Images/SuperChance/Keyboard/9.png" 
+                Margin="592,466,0,0"
+                HorizontalAlignment="Left"
+                Tag="9"
+                TouchDown="Keyboard_TouchDown"
+                VerticalAlignment="Top" Height="80" Width="93"/>
+
+            <Image Source="/Images/SuperChance/Keyboard/borrar.png" 
+                Margin="394,752,0,0"
+                HorizontalAlignment="Left"
+                Tag="Borrar"
+                TouchDown="Btn_DeleteTouchDown"
+                VerticalAlignment="Top" Height="80" Width="94"/>
+
+            <Image Source="/Images/SuperChance/Keyboard/Clearall.png" 
+                Margin="592,752,0,0"
+                HorizontalAlignment="Left"
+                TouchDown="Btn_DeleteAllTouchDown"
+                Tag="All"
+                VerticalAlignment="Top" Height="80" Width="93"/>
+
+            <Image Source="/Images/SuperChance/Buttons/BtnNumeroAdicional.png"
+                   HorizontalAlignment="Center"
+                   TouchDown="Btn_NumAdd"
+                   VerticalAlignment="Top" Height="72" Width="324" Margin="378,882,378,0"/>
+
+
+            <Image Source="/Images/SuperChance/Buttons/BtnNuevaApuesta.png"
+                   HorizontalAlignment="Left"
+                   TouchDown="Btn_Cancel"
+                   VerticalAlignment="Top" Height="72" Width="324" Margin="164,1241,0,0"/>
+
+
+            <Image Source="/Images/SuperChance/Buttons/BtnConfirmarA.png"
+                   HorizontalAlignment="Left"
+                   TouchDown="Btn_Continue"
+                   VerticalAlignment="Top" Height="72" Width="324" Margin="599,1241,0,0"/>
+
+
+
+
+        </Grid>
+
+        </Grid>
+    </Viewbox>
+</UserControl>

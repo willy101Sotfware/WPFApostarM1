@@ -1,0 +1,227 @@
+﻿<UserControl x:Class="WPFApostar.UserControls.Paquetes.SelectPaqueteUC"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFApostar.UserControls.Paquetes"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="1920" d:DesignWidth="1080">
+
+
+    <UserControl.Resources>
+        <Style x:Key="DesignView"
+               TargetType="ListViewItem"
+               >
+            <EventSetter Event="TouchDown"
+             Handler="Btn_SelectPacket"
+                                         />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Border x:Name="StyleBorder">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="StyleBorder" 
+                                        Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Viewbox Stretch="Uniform">
+        <Grid Width="1080" Height="1920">
+
+
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="400"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/Backgrounds/bgGray.png"/>
+            </Grid.Background>
+
+            <TextBlock 
+            x:Name="tbTimer"
+            FontSize="45"
+            Foreground="Black"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="0,10,35,0" Height="60" Width="126" Grid.Column="1"/>
+
+            <TextBlock Text="Paquetes de celular"         
+               Margin="0,301,0,0"
+               TextAlignment="Center"
+               VerticalAlignment="Top"   
+               HorizontalAlignment="Center"
+               Height="89"                       
+               TextWrapping="wrap"
+                       FontWeight="Bold"
+               Width="468" FontSize="50" 
+                       Foreground="Black"/>
+
+
+
+            <Image Source="/Images/Others/IcoApostar.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top" Height="208" Width="540" Margin="0,56,0,0"/>
+
+
+
+            <Grid Grid.Row="1">
+
+
+                <Image Source="/Images/Backgrounds/BgPay.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top" Height="1250" Width="854" Margin="0,63,0,0"/>
+
+
+
+                <TextBlock Text="Seleccione el paquete"         
+               Margin="0,204,0,0"
+               TextAlignment="Center"
+               VerticalAlignment="Top"   
+               HorizontalAlignment="Center"
+               Height="89"                       
+               TextWrapping="wrap"
+               Width="600" FontSize="50" FontFamily="Yu Gothic UI Semibold" Foreground="White"/>
+
+
+
+
+                <materialDesign:TransitioningContent  
+                OpeningEffectsOffset="{materialDesign:IndexedItemOffsetMultiplier 0:0:1.2}" 
+                Name="btnMapSeats" Margin="213,770,211,445" RenderTransformOrigin="0.507,0.5">
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="SlideInFromBottom"  Duration="0:0:1.9"/>
+                    </materialDesign:TransitioningContent.OpeningEffects>
+
+                    <ListView 
+                    x:Name="lvPackets"
+                    ItemContainerStyle="{DynamicResource DesignView}"                   
+                    ItemsSource="{Binding}"            
+                    SelectionMode="Single" 
+                    Background="{x:Null}"
+                    Margin="-74,-453,-76,-273">
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="3"
+                                  VerticalAlignment="Top"
+                                 HorizontalAlignment="Center"/>
+
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid 
+                                       
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Margin="0,30,10,0"
+                                 x:Name="PackSelected"                               
+                                Width="250"
+                                Height="250">
+
+                                    <Grid.Background>
+                                        <ImageBrush ImageSource="/Images/others/Backpack.png"/>
+                                    </Grid.Background>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="200" />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0"                      
+                                        x:Name="PacketSelected"
+                                 
+                                      >
+
+
+                                        <TextBlock 
+                                    Text="{Binding valorComercial}"
+                                    FontSize="20"
+                                    TextAlignment="Center"
+                                    TextWrapping="Wrap"
+                                    FontWeight="Bold"
+                                    Margin="0,20,0,0"
+                                    Foreground="black"
+                                   VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Center"
+                                    Grid.Column="0"
+                                />
+
+                                        <TextBlock 
+                                    Text="{Binding nomPaquete}"
+                                    FontSize="18"
+                                    TextAlignment="Center"
+                                    TextWrapping="Wrap"
+                                    Margin="0,30,0,0"       
+                                    FontWeight="Bold"
+                                    Foreground="Black"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Grid.Column="0"
+                                />
+
+
+
+
+
+
+                                        <TextBlock 
+                                    Text="{Binding abreviatura}"
+                                    FontSize="20"
+                                    Foreground="black"
+                                    TextAlignment="Center"
+                                    TextWrapping="Wrap"
+                                    FontWeight="Bold"
+                                    Margin="0,80,0,-30"
+                                    VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Center"
+                                    Grid.Column="0"
+                                />
+
+
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+                </materialDesign:TransitioningContent>
+
+
+                <Image x:Name="ImageData" Height="144" VerticalAlignment="Top"  Margin="358,10,358,0" />
+
+
+                <Image  Source="/Images/Buttons/btnCancelar.png"
+                   HorizontalAlignment="Center"
+               x:Name="BtnCancelar"
+                TouchDown="BtnCancelar_TouchDown"
+                   VerticalAlignment="Top" Width="352" Height="111" Margin="0,1264,0,0"/>
+
+
+
+            </Grid>
+
+
+
+
+
+
+
+
+
+
+
+        </Grid>
+    </Viewbox>
+</UserControl>

@@ -1,0 +1,364 @@
+﻿<UserControl x:Class="WPFApostar.UserControls.Chance.DateUC"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFApostar.UserControls.Chance"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="1920" d:DesignWidth="1080"
+   >
+
+    <UserControl.Resources>
+        <Style x:Key="DesignView"
+               TargetType="ListViewItem"
+               >
+            <EventSetter Event="PreviewMouseDown" 
+                         Handler="BtnSelectLottery"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Border x:Name="StyleBorder">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="StyleBorder" 
+                                        Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Viewbox Stretch="Uniform">
+        <Grid Width="1080" Height="1920">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/Backgrounds/bgGray.png"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="200" />
+        </Grid.RowDefinitions>
+
+
+        <Grid
+                Grid.Row="0">
+
+            <Image Source="/Images/Others/IcoApostar.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top" Height="123" Width="345" Margin="0,40,0,0"/>
+
+            <Image Source="/Images/Others/TxtDivierteteGris.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top" Height="124" Width="672" Margin="0,200,0,0"/>
+
+
+
+            <Image Source="/Images/Buttons/BtnAtras.png"
+                   HorizontalAlignment="Left"
+                   TouchDown="BtnAtras_TouchDown"
+                   VerticalAlignment="Top" Height="108" Width="112" Margin="76,51,0,0"/>
+
+            <TextBlock 
+            x:Name="tbTimer"
+            FontSize="45"
+            Foreground="Black"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="0,10,35,0" Height="60" Width="126" Grid.Column="1"/>
+
+        </Grid>
+
+        <Grid
+            Grid.Row="1">
+
+
+            <Image Source="/Images/SuperChance/Backgrounds/BgApuesta.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top" Width="897" Height="1455" Margin="0,34,0,0"/>
+
+
+            <Image Source="/Images/SuperChance/Others/txtApuesta1.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Width="202" Height="32" Margin="166,110,0,0"/>
+
+            <Image Source="/Images/SuperChance/Others/txtPaso2.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Width="437" Height="67" Margin="178,160,0,0"/>
+
+            <Image Source="/Images/SuperChance/Others/LogoChance.png" 
+                   Margin="412,0,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Height="94" Width="242"/>
+
+
+            <Image Source="/Images/SuperChance/Others/txtpaso3.png"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" Width="509" Height="62" Margin="178,564,0,0"/>
+
+
+            <Image Source="/Images/SuperChance/Buttons/BtnAgregar.png"
+                   HorizontalAlignment="Left"
+                   TouchDown="Btn_ContinuarTouchDown"
+                   Visibility="Hidden"
+                   MouseDown="Btn_ContinueMouse"
+                   VerticalAlignment="Top" Width="228" Height="73" Margin="430,686,0,0" RenderTransformOrigin="0.107,0.617"/>
+
+
+            <Image Source="/Images/SuperChance/Backgrounds/BgDia.png"
+                   HorizontalAlignment="Center"
+                   TouchDown="SelectDay_TouchDown"
+                   x:Name="bgDia1"
+                   Tag="Fecha1"
+                   VerticalAlignment="Top" Width="228" Height="247" Margin="165,270,687,0"/>
+
+            <Image Source="/Images/SuperChance/Backgrounds/BgDia.png"
+                   HorizontalAlignment="Center"
+                   TouchDown="SelectDay_TouchDown"
+                   x:Name="bgDia2"
+                   Tag="Fecha2"
+                   VerticalAlignment="Top" Width="228" Height="247" Margin="426,270,426,0"/>
+
+            <Image Source="/Images/SuperChance/Backgrounds/BgFechaS.png"
+                   HorizontalAlignment="Center"
+                   TouchDown="SelectDay_TouchDown"
+                   x:Name="Dia1S"
+                   Visibility="Hidden"
+                   Tag="Fecha1"
+                   VerticalAlignment="Top" Width="228" Height="247" Margin="165,270,687,0"/>
+
+            <Image Source="/Images/SuperChance/Backgrounds/BgFechaS.png"
+                   HorizontalAlignment="Center"
+                   TouchDown="SelectDay_TouchDown"
+                   x:Name="Dia2S"
+                      Visibility="Hidden" 
+                   Tag="Fecha2"
+                   VerticalAlignment="Top" Width="228" Height="247" Margin="426,270,426,0"/>
+
+            <Image Source="/Images/SuperChance/Backgrounds/BgDia.png"
+                   HorizontalAlignment="Center"
+                   TouchDown="SelectDay_TouchDown"
+                   x:Name="bgDia3"
+                   Tag="Fecha3"
+                   VerticalAlignment="Top" Width="228" Height="247" Margin="687,270,165,0"/>
+
+            <Image  Source="/Images/SuperChance/Backgrounds/BgFechaS.png"
+                   HorizontalAlignment="Center"
+                   Visibility="Hidden" 
+                   x:Name="Dia3S"
+                   Tag="Fecha3"
+                   VerticalAlignment="Top" Width="228" Height="247" Margin="687,270,165,0"/>
+
+            <Image Source="/Images/SuperChance/Others/txtDia.png"
+                   HorizontalAlignment="Left"
+                   Tag="Fecha1"
+                   TouchDown="SelectDay_TouchDown"
+                   VerticalAlignment="Top" Width="75" Height="38" Margin="241,292,0,0"/>
+
+
+
+            <Image Source="/Images/SuperChance/Others/txtDia.png"
+                   HorizontalAlignment="Left"
+                   Tag="Fecha3"
+                   TouchDown="SelectDay_TouchDown"                   
+                   VerticalAlignment="Top" Width="76" Height="38" Margin="764,292,0,0"/>
+
+            <Image Source="/Images/SuperChance/Others/txtDia.png"
+                   HorizontalAlignment="Left"
+                   Tag="Fecha2"
+                   TouchDown="SelectDay_TouchDown"
+                   VerticalAlignment="Top" Width="75" Height="38" Margin="500,292,0,0"/>
+
+            <Label Content="HOY" 
+                   HorizontalAlignment="Left"
+                   Margin="201,348,0,0"
+                   VerticalAlignment="Top"
+                   HorizontalContentAlignment="Center"
+                   Height="84" 
+                   MouseDown="SelectDay_TouchDown"
+                    Tag="Fecha1"
+                   x:Name="dia_mes1"
+                   Width="155"
+                   Foreground="White"
+                   FontSize="60"
+                   FontFamily="Yu Gothic UI Semibold"/>
+
+            <Label Content="" 
+                   HorizontalAlignment="Left"
+                   Margin="467,348,0,0"
+                   VerticalAlignment="Top"
+                   Height="84" 
+                   TouchDown="SelectDay_TouchDown"
+                    Tag="Fecha2"
+                   x:Name="dia_mes2"
+                 HorizontalContentAlignment="Center" 
+                   Width="155"
+                   Foreground="White"
+                   FontSize="60"
+                   FontFamily="Yu Gothic UI Semibold"/>
+
+            <Label Content="" 
+                   HorizontalAlignment="Left"
+                   Margin="730,348,0,0"
+                   VerticalAlignment="Top"
+                   Height="84" 
+                   x:Name="dia_mes3"
+                   TouchDown="SelectDay_TouchDown"
+                    Tag="Fecha3"
+                   HorizontalContentAlignment="Center"
+                   Width="156"
+                   Foreground="White"
+                   FontSize="60"
+                   FontFamily="Yu Gothic UI Semibold"/>
+
+            <Label Content="" 
+                   HorizontalAlignment="Left"
+                   Margin="702,437,0,0"
+                   VerticalAlignment="Top"
+                   HorizontalContentAlignment="Center"
+                   Height="61" 
+                   x:Name="mes_ano3"
+                   TouchDown="SelectDay_TouchDown"
+                   Tag="Fecha3"
+                   Width="198"
+                   Foreground="White"
+                   FontSize="35"
+                   FontFamily="Yu Gothic UI Semibold"/>
+
+            <Label Content="" 
+                   HorizontalAlignment="Left"
+                   Margin="448,437,0,0"
+                   VerticalAlignment="Top"
+                   Height="61" 
+                   x:Name="mes_ano2"
+                   Tag="Fecha2"
+                   TouchDown="SelectDay_TouchDown"
+                   Width="189"
+                   Foreground="White"
+                   HorizontalContentAlignment="Center"
+                   FontSize="35"
+                   FontFamily="Yu Gothic UI Semibold"/>
+
+            <Label Content="" 
+                   HorizontalAlignment="Left"
+                   Margin="178,437,0,0"
+                   VerticalAlignment="Top"
+                   Height="61" 
+                   HorizontalContentAlignment="Center"
+                   x:Name="mes_ano1"
+                   MouseDown="SelectDay_TouchDown"
+                   Tag="Fecha1"
+                   Width="204"
+                   Foreground="White"
+                   FontSize="35"
+                   FontFamily="Yu Gothic UI Semibold"/>
+
+
+            <materialDesign:TransitioningContent  
+                OpeningEffectsOffset="{materialDesign:IndexedItemOffsetMultiplier 0:0:1.2}" 
+                Name="btnMapSeats" Margin="213,642,202,50" RenderTransformOrigin="0.507,0.5">
+                <materialDesign:TransitioningContent.OpeningEffects>
+                    <materialDesign:TransitionEffect Kind="SlideInFromBottom"  Duration="0:0:1.9"/>
+                </materialDesign:TransitioningContent.OpeningEffects>
+
+                <ListView 
+                    x:Name="lvLotteries"
+                    ItemContainerStyle="{DynamicResource DesignView}"
+                    BorderBrush="{x:Null}"
+                    ItemsSource="{Binding}"            
+                    SelectionMode="Multiple" Width="662" Background="{x:Null}" HorizontalAlignment="Center">
+
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="4"
+                                  VerticalAlignment="Top"
+                                 HorizontalAlignment="Center"/>
+
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid 
+                                       
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="0,10,10,0"
+                                 x:Name="LotterieSelected"
+                                Width="120"
+                                Height="162">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="162" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0"                      
+                                        x:Name="LotteriesSelected"
+                                      >
+
+                                    <Grid.Background>
+
+                                        <ImageBrush 
+                                            ImageSource="{Binding ImageData}"                                            
+                                            Stretch="Fill"                                      
+                                            />
+                                    </Grid.Background>
+
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </materialDesign:TransitioningContent>
+
+
+
+
+
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+
+            <Grid Grid.Row="2">
+
+                <TextBlock 
+                x:Name="txtValidaciones"
+                Text="*No ha seleccionado ninguna loteria"
+                TextAlignment="Center" Margin="67,-46,117,196"
+                FontSize="30"
+                FontWeight="Bold"
+                Foreground="White"
+                />
+                <Image Source="/Images/Buttons/btnCancelar.png" 
+                   Margin="215,4,0,0"
+                   HorizontalAlignment="Left"
+                   TouchDown="Btn_CancelarTouchDown"
+                   x:Name="BtnCancelar"
+                   VerticalAlignment="Top" Height="77" Width="221"/>
+
+
+                <Image Source="/Images/Buttons/BtnContinuar.png" 
+                   Margin="600,9,0,0"
+                   HorizontalAlignment="Left"
+                   TouchDown="Btn_ContinuarTouchDown"
+                   
+                   VerticalAlignment="Top" Height="66" Width="232"/>
+
+
+            </Grid>
+
+            <!--<Image Source="/Images/Others/LogoEcity.png" 
+                   Margin="932,337,20,20"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" Width="128" Height="43"/>-->
+
+        </Grid>
+        </Grid>
+    </Viewbox>
+</UserControl>
