@@ -27,11 +27,10 @@ namespace WPFApostar.UserControls.Betplay
             ActivateTimer();
         }
 
-        private void Keyboard_TouchDown(object sender, TouchEventArgs e)
+        private void Keyboard_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             try
             {
-
                 if (txtcedula == true)
                 {
                     Image image = (Image)sender;
@@ -44,10 +43,7 @@ namespace WPFApostar.UserControls.Betplay
                     Image image = (Image)sender;
                     string Tag = image.Tag.ToString();
                     TxtValidate.Text += Tag;
-
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -84,7 +80,7 @@ namespace WPFApostar.UserControls.Betplay
             }
         }
 
-        private void Btn_DeleteTouchDown(object sender, TouchEventArgs e)
+        private void Btn_DeletePreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             try
             {
@@ -96,7 +92,6 @@ namespace WPFApostar.UserControls.Betplay
                     if (val.Length > 0)
                     {
                         TxtCedula.Text = val.Remove(val.Length - 1);
-                        // TxtValidate.Text = val2.Remove(val.Length - 1);
                     }
                 }
 
@@ -104,13 +99,9 @@ namespace WPFApostar.UserControls.Betplay
                 {
                     if (val2.Length > 0)
                     {
-                        //    TxtCedula.Text = val.Remove(val.Length - 1);
                         TxtValidate.Text = val2.Remove(val2.Length - 1);
                     }
-
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -118,11 +109,10 @@ namespace WPFApostar.UserControls.Betplay
             }
         }
 
-        private void Btn_DeleteAllTouchDown(object sender, TouchEventArgs e)
+        private void Btn_DeleteAllPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             try
             {
-
                 if (txtcedula == true)
                 {
                     TxtCedula.Text = string.Empty;
@@ -132,7 +122,6 @@ namespace WPFApostar.UserControls.Betplay
                 {
                     TxtValidate.Text = string.Empty;
                 }
-
             }
             catch (Exception ex)
             {
@@ -140,9 +129,7 @@ namespace WPFApostar.UserControls.Betplay
             }
         }
 
-
-
-        private void Btn_ContinuarTouchDown(object sender, EventArgs e)
+        private void Btn_ContinuarPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             SetCallBacksNull();
             timer.CallBackStop?.Invoke(1);
@@ -150,22 +137,21 @@ namespace WPFApostar.UserControls.Betplay
             if (Validate())
             {
                 Transaction.Document = TxtCedula.Text;
-
                 Utilities.navigator.Navigate(UserControlView.Recharge, Transaction);
-
-
             }
             else
             {
                 Utilities.ShowModal("El documento ingresado no coincide, por favor verifique la información", EModalType.Error);
                 ActivateTimer();
-           //     Utilities.navigator.Navigate(UserControlView.Login);
             }
-
         }
 
-      
-
+        private void Btn_CancelarPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SetCallBacksNull();
+            timer.CallBackStop?.Invoke(1);
+            Utilities.navigator.Navigate(UserControlView.Menu);
+        }
 
         private void ActivateTimer()
         {
@@ -214,13 +200,6 @@ namespace WPFApostar.UserControls.Betplay
             {
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, ex.ToString());
             }
-        }
-
-        private void Btn_CancelarTouchDown(object sender, EventArgs e)
-        {
-            SetCallBacksNull();
-            timer.CallBackStop?.Invoke(1);
-            Utilities.navigator.Navigate(UserControlView.Menu);
         }
 
         private void focusTxtCedula(object sender, RoutedEventArgs e)

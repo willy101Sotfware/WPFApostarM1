@@ -191,6 +191,15 @@
                    PreviewMouseDown="Btn_ContinuarPreviewMouseDown"
                    VerticalAlignment="Top" Height="88" Width="317"/>
 
+                <Image Source="/Images/Buttons/btnAtras.png"
+                   HorizontalAlignment="Left"
+                   PreviewMouseDown="BtnAtras_PreviewMouseDown"
+                   VerticalAlignment="Top" Height="80" Width="200" Margin="20,20,0,0"/>
+
+                <Image Source="/Images/Buttons/btnInicio.png"
+                   HorizontalAlignment="Right"
+                   PreviewMouseDown="BtnInicio_PreviewMouseDown"
+                   VerticalAlignment="Top" Height="80" Width="200" Margin="0,20,20,0"/>
 
             </Grid>
 

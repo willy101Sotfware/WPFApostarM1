@@ -438,5 +438,19 @@ namespace WPFApostar.UserControls.Paquetes
                 ActivateTimer();
             }
         }
+
+        private void BtnAtras_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SetCallBacksNull();
+            timer.CallBackStop?.Invoke(1);
+            Utilities.navigator.Navigate(UserControlView.Menu);
+        }
+
+        private void BtnInicio_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SetCallBacksNull();
+            timer.CallBackStop?.Invoke(1);
+            Utilities.navigator.Navigate(UserControlView.Main);
+        }
     }
 }
