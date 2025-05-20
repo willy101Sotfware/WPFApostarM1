@@ -54,28 +54,28 @@
                    HorizontalAlignment="Left"
                    x:Name="C1Txt"
                    Tag="1"
-                   TouchDown="SelectCifras_TouchDown"
+                   PreviewMouseDown="SelectCifras_PreviewMouseDown"
                    VerticalAlignment="Top" Height="25" Width="97" Margin="835,147,0,0"/>
 
             <Image Source="/Images/Others/TxtC2.png"
                    HorizontalAlignment="Left"
                    x:Name="C2Txt"
                    Tag="2"
-                   TouchDown="SelectCifras_TouchDown"
+                   PreviewMouseDown="SelectCifras_PreviewMouseDown"
                    VerticalAlignment="Top" Height="25" Width="104" Margin="639,147,0,0"/>
 
             <Image Source="/Images/Others/TxtC3.png"
                    HorizontalAlignment="Left"
                    x:Name="C3Txt"
                    Tag="3"
-                   TouchDown="SelectCifras_TouchDown"
+                   PreviewMouseDown="SelectCifras_PreviewMouseDown"
                    VerticalAlignment="Top" Height="25" Width="102" Margin="456,147,0,0"/>
 
             <Image Source="/Images/Others/TxtC4.png"
                    HorizontalAlignment="Left"
                    x:Name="C4Txt"
                    Tag="4"
-                   TouchDown="SelectCifras_TouchDown"
+                   PreviewMouseDown="SelectCifras_PreviewMouseDown"
                    VerticalAlignment="Top" Height="25" Width="103" Margin="268,147,0,0"/>
 
             <Image Source="/Images/Others/TxtSeleccioneTipoNum.png"
@@ -86,21 +86,21 @@
                    HorizontalAlignment="Left"
                    x:Name="C4Check"
                    Tag="4"
-                   TouchDown="SelectCifras_TouchDown"
+                   PreviewMouseDown="SelectCifras_PreviewMouseDown"
                    VerticalAlignment="Top" Height="38" Width="43" Margin="224,140,0,0"/>
 
             <Image Source="/Images/Buttons/checkNumSi.png"
                    HorizontalAlignment="Left"
                    x:Name="C4CheckSi"
                    Tag="4"
-                   TouchDown="SelectCifras_TouchDown"
+                   PreviewMouseDown="SelectCifras_PreviewMouseDown"
                    VerticalAlignment="Top" Height="38" Width="43" Margin="224,140,0,0"/>
 
             <Image Source="/Images/Buttons/checkNum.png"
                    HorizontalAlignment="Left"
                    x:Name="C3Check"
                    Tag="3"
-                   TouchDown="SelectCifras_TouchDown"
+                   PreviewMouseDown="SelectCifras_PreviewMouseDown"
                    VerticalAlignment="Top" Height="38" Width="43" Margin="407,140,0,0"/>
 
             <Image Source="/Images/Buttons/checkNumSi.png"
@@ -108,20 +108,20 @@
                    x:Name="C3CheckSi"
                    Visibility="Hidden"
                    Tag="3"
-                   TouchDown="SelectCifras_TouchDown"
+                   PreviewMouseDown="SelectCifras_PreviewMouseDown"
                    VerticalAlignment="Top" Height="38" Width="43" Margin="407,140,0,0"/>
 
             <Image Source="/Images/Buttons/checkNum.png"
                    HorizontalAlignment="Left"
                    x:Name="C2Check"
                    Tag="2"
-                   TouchDown="SelectCifras_TouchDown"
+                   PreviewMouseDown="SelectCifras_PreviewMouseDown"
                    VerticalAlignment="Top" Height="38" Width="44" Margin="588,140,0,0"/>
 
             <Image Source="/Images/Buttons/checkNumSi.png"
                    HorizontalAlignment="Left"
                    x:Name="C2CheckSi"
-                   TouchDown="SelectCifras_TouchDown"
+                   PreviewMouseDown="SelectCifras_PreviewMouseDown"
                    Tag="2"
                    Visibility="Hidden"
                    VerticalAlignment="Top" Height="38" Width="43" Margin="588,140,0,0"/>
@@ -130,7 +130,7 @@
                    HorizontalAlignment="Left"
                    x:Name="C1Check"
                    Tag="1"
-                   TouchDown="SelectCifras_TouchDown"
+                   PreviewMouseDown="SelectCifras_PreviewMouseDown"
                    VerticalAlignment="Top" Height="38" Width="43" Margin="786,140,0,0"/>
 
             <Image Source="/Images/Buttons/checkNumSi.png"
@@ -138,7 +138,7 @@
                    x:Name="C1CheckSi"
                    Visibility="Hidden"
                    Tag="1"
-                   TouchDown="SelectCifras_TouchDown"
+                   PreviewMouseDown="SelectCifras_PreviewMouseDown"
                    VerticalAlignment="Top" Height="38" Width="44" Margin="786,140,0,0"/>
 
 
@@ -257,7 +257,7 @@
 
             <Image Source="/Images/SuperChance/Buttons/BtnNumeroAleatorio.png"
                    HorizontalAlignment="Left"
-                   MouseDown="Btn_NumRandom"
+                   PreviewMouseDown="Btn_NumRandom_PreviewMouseDown"
                    VerticalAlignment="Top" Height="72" Width="324" Margin="424,439,0,0"/>
 
 
@@ -376,50 +376,50 @@
             <Image Source="/Images/SuperChance/Keyboard/0.png" 
                 Margin="553,1132,0,0"
                 HorizontalAlignment="Left"
-                MouseDown="KeyboardTouch"
+                PreviewMouseDown="KeyboardTouch_PreviewMouseDown"
                 Tag="0"
                 VerticalAlignment="Top" Height="80" Width="94"/>
             <Image Source="/Images/SuperChance/Keyboard/1.png" 
                 Margin="450,1038,0,0"
                 HorizontalAlignment="Left"
-                MouseDown="KeyboardTouch"
+                PreviewMouseDown="KeyboardTouch_PreviewMouseDown"
                 Tag="1"
                 VerticalAlignment="Top" Height="80" Width="94"/>
             <Image Source="/Images/SuperChance/Keyboard/2.png" 
                 Margin="553,1038,0,0"
                 HorizontalAlignment="Left"
-                TouchDown="KeyboardTouch"
+                PreviewMouseDown="KeyboardTouch_PreviewMouseDown"
                 Tag="2"
                 VerticalAlignment="Top" Height="80" Width="94"/>
             <Image Source="/Images/SuperChance/Keyboard/3.png" 
                 Margin="648,1038,0,0"
                 HorizontalAlignment="Left"
-                TouchDown="KeyboardTouch"
+                PreviewMouseDown="KeyboardTouch_PreviewMouseDown"
                 Tag="3"
                 VerticalAlignment="Top" Height="80" Width="93"/>
             <Image Source="/Images/SuperChance/Keyboard/4.png" 
                 Margin="450,944,0,0"
                 HorizontalAlignment="Left"
-                TouchDown="KeyboardTouch"
+                PreviewMouseDown="KeyboardTouch_PreviewMouseDown"
                 Tag="4"
                 VerticalAlignment="Top" Height="80" Width="94"/>
             <Image Source="/Images/SuperChance/Keyboard/5.png" 
                 Margin="553,944,0,0"
                 HorizontalAlignment="Left"
-                MouseDown="KeyboardTouch"
+                PreviewMouseDown="KeyboardTouch_PreviewMouseDown"
                 Tag="5"
                 VerticalAlignment="Top" Height="80" Width="94"/>
 
             <Image Source="/Images/SuperChance/Keyboard/6.png" 
                 Margin="648,944,0,0"
                 HorizontalAlignment="Left"
-                TouchDown="KeyboardTouch"
+                PreviewMouseDown="KeyboardTouch_PreviewMouseDown"
                 Tag="6"
                 VerticalAlignment="Top" Height="80" Width="93"/>
 
             <Image Source="/Images/SuperChance/Keyboard/7.png" 
                 Margin="450,846,0,0"
-                TouchDown="KeyboardTouch"
+                PreviewMouseDown="KeyboardTouch_PreviewMouseDown"
                 HorizontalAlignment="Left"
                 Tag="7"
                 VerticalAlignment="Top" Height="80" Width="94"/>
@@ -428,33 +428,33 @@
                 Margin="553,846,0,0"
                 HorizontalAlignment="Left"
                 Tag="8"
-                TouchDown="KeyboardTouch"
+                PreviewMouseDown="KeyboardTouch_PreviewMouseDown"
                 VerticalAlignment="Top" Height="80" Width="94"/>
 
             <Image Source="/Images/SuperChance/Keyboard/9.png" 
                 Margin="648,846,0,0"
                 HorizontalAlignment="Left"
                 Tag="9"
-                TouchDown="KeyboardTouch"
+                PreviewMouseDown="KeyboardTouch_PreviewMouseDown"
                 VerticalAlignment="Top" Height="80" Width="93"/>
 
             <Image Source="/Images/SuperChance/Keyboard/borrar.png" 
                 Margin="450,1132,0,0"
                 HorizontalAlignment="Left"
                 Tag="Borrar"
-                TouchDown="KeyboardBtnDelete"
+                PreviewMouseDown="KeyboardBtnDelete_PreviewMouseDown"
                 VerticalAlignment="Top" Height="80" Width="94"/>
 
             <Image Source="/Images/SuperChance/Keyboard/Clearall.png" 
                 Margin="648,1132,0,0"
                 HorizontalAlignment="Left"
-                TouchDown="KeyboardBtnDeleteAll"
+                PreviewMouseDown="KeyboardBtnDeleteAll_PreviewMouseDown"
                 Tag="All"
                 VerticalAlignment="Top" Height="80" Width="93"/>
 
             <Image Source="/Images/SuperChance/Buttons/BtnNumeroAdicional.png"
                    HorizontalAlignment="Left"
-                   TouchDown="BtnAddNum"
+                   PreviewMouseDown="BtnAddNum_PreviewMouseDown"
                    VerticalAlignment="Top" Height="72" Width="324" Margin="433,1278,0,0"/>
 
 
@@ -470,13 +470,13 @@
 
             <Image Source="/Images/SuperChance/Buttons/BtnNuevaApuesta.png"
                    HorizontalAlignment="Left"
-                   TouchDown="BtnCancelar"
+                   PreviewMouseDown="BtnCancelar_PreviewMouseDown"
                    VerticalAlignment="Top" Height="72" Width="324" Margin="216,1398,0,0"/>
 
 
             <Image Source="/Images/SuperChance/Buttons/BtnConfirmarA.png"
                    HorizontalAlignment="Left"
-                   TouchDown="BtnContinuar"
+                   PreviewMouseDown="BtnContinuar_PreviewMouseDown"
                    VerticalAlignment="Top" 
                    Height="72" Width="324" 
                    Margin="621,1398,0,0"/>

@@ -146,11 +146,11 @@
 
 
             <Image Source="/Images/Buttons/btnCancelar.png"
-           TouchDown="BtnCancelar_TouchDown"
+           PreviewMouseDown="BtnCancelar_PreviewMouseDown"
 VerticalAlignment="Top" Height="80" Margin="165,1307,536,0" Grid.Row="1"/>
 
             <Image Source="/Images/Buttons/btnContinuar.png" 
-           TouchDown="BtnContinuar_TouchDown"
+           PreviewMouseDown="BtnContinuar_PreviewMouseDown"
 VerticalAlignment="Top" Height="76" Margin="594,1311,157,0" RenderTransformOrigin="0.457,0.026" Grid.Row="1"/>
 
 

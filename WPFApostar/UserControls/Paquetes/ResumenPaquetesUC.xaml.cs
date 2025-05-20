@@ -7,6 +7,7 @@ using WPFApostar.Classes.UseFull;
 using WPFApostar.Models;
 using WPFApostar.Resources;
 using System.IO;
+using System.Windows.Input;
 
 namespace WPFApostar.UserControls.Paquetes
 {
@@ -113,6 +114,35 @@ namespace WPFApostar.UserControls.Paquetes
             Utilities.ShowModal("Estamos verificando la transacción un momento por favor", EModalType.Preload);
         }
 
+        private void BtnCancelar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SetCallBacksNull();
+            timer.CallBackStop?.Invoke(1);
+            Utilities.navigator.Navigate(UserControlView.Menu);
+        }
+
+        private void BtnContinuar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DisableView();
+            SetCallBacksNull();
+            timer.CallBackStop?.Invoke(1);
+            Transaction.Amount = Transaction.SelectOperator.valorComercial.ToString();
+            Task.Run(() =>
+            {
+                var isValidateMoney = AdminPayPlus.ValidateMoney(Transaction).GetAwaiter().GetResult();
+                Utilities.CloseModal();
+                if (isValidateMoney != false)
+                {
+                    SendData();
+                }
+                else
+                {
+                    Utilities.ShowModal("En estos momentos la maquina no cuenta con suficiente cargue para esta operación", EModalType.Error);
+                    Utilities.navigator.Navigate(UserControlView.Menu);
+                }
+            });
+            Utilities.ShowModal("Estamos verificando la transacción un momento por favor", EModalType.Preload);
+        }
 
         private void SendData()
         {

@@ -70,48 +70,48 @@
 
             <Image Source="/Images/keyboard/0.png"
                    HorizontalAlignment="Center"
-                   TouchDown="Keyboard_TouchDown"
+                   PreviewMouseDown="Keyboard_PreviewMouseDown"
                    Tag="0"
                    VerticalAlignment="Top" Height="104" Width="116" Margin="0,760,0,0"/>
 
             <Image Source="/Images/keyboard/1.png"
                    HorizontalAlignment="Left"
-                   TouchDown="Keyboard_TouchDown"
+                   PreviewMouseDown="Keyboard_PreviewMouseDown"
                    Tag="1"
                    VerticalAlignment="Top" Height="105" Width="117" Margin="331,346,0,0"/>
 
             <Image Source="/Images/keyboard/2.png"
                    HorizontalAlignment="Left"
-                    TouchDown="Keyboard_TouchDown"
+                   PreviewMouseDown="Keyboard_PreviewMouseDown"
                    Tag="2"
                    VerticalAlignment="Top" Height="105" Width="116" Margin="479,346,0,0"/>
 
             <Image Source="/Images/keyboard/3.png"
                    HorizontalAlignment="Left"
-                    TouchDown="Keyboard_TouchDown"
+                   PreviewMouseDown="Keyboard_PreviewMouseDown"
                    Tag="3"
                    VerticalAlignment="Top" Height="105" Width="117" Margin="650,346,0,0"/>
 
             <Image Source="/Images/keyboard/4.png"
                    HorizontalAlignment="Left"
-                    TouchDown="Keyboard_TouchDown"
+                   PreviewMouseDown="Keyboard_PreviewMouseDown"
                    Tag="4"
                    VerticalAlignment="Top" Height="105" Width="117" Margin="331,485,0,0"/>
 
             <Image Source="/Images/keyboard/5.png"
                    HorizontalAlignment="Left"
-                    TouchDown="Keyboard_TouchDown"
+                   PreviewMouseDown="Keyboard_PreviewMouseDown"
                    Tag="5"
                    VerticalAlignment="Top" Height="105" Width="116" Margin="486,485,0,0"/>
 
             <Image Source="/Images/keyboard/6.png"
                    HorizontalAlignment="Left"
-                    TouchDown="Keyboard_TouchDown"
+                   PreviewMouseDown="Keyboard_PreviewMouseDown"
                    Tag="6"
                    VerticalAlignment="Top" Height="105" Width="117" Margin="649,485,0,0"/>
 
             <Image Source="/Images/keyboard/7.png"
-                    TouchDown="Keyboard_TouchDown"
+                   PreviewMouseDown="Keyboard_PreviewMouseDown"
                    HorizontalAlignment="Left"
                    Tag="7"
                    VerticalAlignment="Top" Height="104" Width="118" Margin="331,627,0,0"/>
@@ -119,36 +119,36 @@
             <Image Source="/Images/keyboard/8.png"
                    HorizontalAlignment="Left"
                    Tag="8"
-                    TouchDown="Keyboard_TouchDown"
+                   PreviewMouseDown="Keyboard_PreviewMouseDown"
                    VerticalAlignment="Top" Height="104" Width="117" Margin="486,627,0,0"/>
 
             <Image Source="/Images/keyboard/9.png"
                    HorizontalAlignment="Left"
                    Tag="9"
-                    TouchDown="Keyboard_TouchDown"
+                   PreviewMouseDown="Keyboard_PreviewMouseDown"
                    VerticalAlignment="Top" Height="104" Width="116" RenderTransformOrigin="0.504,0.458" Margin="648,627,0,0"/>
 
             <Image Source="/Images/keyboard/Borrar.png"
                    HorizontalAlignment="Left"
                    Tag="Borrar"
-                   TouchDown="Btn_DeleteTouchDown"
+                   PreviewMouseDown="Btn_DeletePreviewMouseDown"
                    VerticalAlignment="Top" Height="104" Width="117" Margin="338,760,0,0"/>
 
             <Image Source="/Images/keyboard/All.png"
                    HorizontalAlignment="Left"
-                    TouchDown="Btn_DeleteAllTouchDown"
+                   PreviewMouseDown="Btn_DeleteAllPreviewMouseDown"
                    Tag="All"
                    VerticalAlignment="Top" Height="104" Width="117" Margin="661,760,0,0"/>
 
             <Image Source="/Images/Buttons/btnCancelar.png"
                    HorizontalAlignment="Left"
-                   TouchDown="Btn_CancelarTouchDown"
+                   PreviewMouseDown="Btn_CancelarPreviewMouseDown"
                    VerticalAlignment="Top" Height="105" Width="227" Margin="263,932,0,0"/>
 
             <Image Source="/Images/Buttons/btnContinuar.png" 
                    Margin="587,932,0,0"
                    HorizontalAlignment="Left"
-                   TouchDown="Btn_ContinuarTouchDown"
+                   PreviewMouseDown="Btn_ContinuarPreviewMouseDown"
                    VerticalAlignment="Top" Height="78" Width="227"/>
 
             <TextBox x:Name="TxtMonto"

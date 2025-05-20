@@ -824,6 +824,175 @@ namespace WPFApostar.UserControls.Chance
                 Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, ex.ToString());
             }
         }
+
+        private void BtnCancelar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            BtnCancelar(sender, e);
+        }
+
+        private void BtnContinuar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            BtnContinuar(sender, e);
+        }
+
+        private void SelectCifras_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                Image image = (Image)sender;
+                string Tag = image.Tag.ToString();
+
+                switch (Tag)
+                {
+                    case "1":
+                        C1CheckSi.Visibility = Visibility.Visible;
+                        C2CheckSi.Visibility = Visibility.Hidden;
+                        C3CheckSi.Visibility = Visibility.Hidden;
+                        C4CheckSi.Visibility = Visibility.Hidden;
+                        break;
+                    case "2":
+                        C1CheckSi.Visibility = Visibility.Hidden;
+                        C2CheckSi.Visibility = Visibility.Visible;
+                        C3CheckSi.Visibility = Visibility.Hidden;
+                        C4CheckSi.Visibility = Visibility.Hidden;
+                        break;
+                    case "3":
+                        C1CheckSi.Visibility = Visibility.Hidden;
+                        C2CheckSi.Visibility = Visibility.Hidden;
+                        C3CheckSi.Visibility = Visibility.Visible;
+                        C4CheckSi.Visibility = Visibility.Hidden;
+                        break;
+                    case "4":
+                        C1CheckSi.Visibility = Visibility.Hidden;
+                        C2CheckSi.Visibility = Visibility.Hidden;
+                        C3CheckSi.Visibility = Visibility.Hidden;
+                        C4CheckSi.Visibility = Visibility.Visible;
+                        break;
+                }
+
+                if (C4CheckSi.Visibility == Visibility.Visible)
+                {
+                    BlockC1.Visibility = Visibility.Hidden;
+                    BlockC2.Visibility = Visibility.Hidden;
+                    BlockC3.Visibility = Visibility.Hidden;
+                    BlockC4.Visibility = Visibility.Hidden;
+                    Num4.Visibility = Visibility.Visible;
+                    Num3.Visibility = Visibility.Visible;
+                    Num2.Visibility = Visibility.Visible;
+                    Num1.Visibility = Visibility.Visible;
+                    txtCombinado.Text = "";
+                    txtDirecto.Text = "";
+                    txtPata.Text = "";
+                    txtUna.Text = "";
+                    Num1.Text = "";
+                    Num2.Text = "";
+                    Num3.Text = "";
+                    Num4.Text = "";
+                    txtCombinado.Visibility = Visibility.Visible;
+                    txtDirecto.Visibility = Visibility.Visible;
+                    txtPata.Visibility = Visibility.Visible;
+                    txtUna.Visibility = Visibility.Visible;
+                }
+                if (C3CheckSi.Visibility == Visibility.Visible)
+                {
+                    BlockC1.Visibility = Visibility.Hidden;
+                    BlockC2.Visibility = Visibility.Hidden;
+                    BlockC3.Visibility = Visibility.Hidden;
+                    BlockC4.Visibility = Visibility.Visible;
+                    Num4.Visibility = Visibility.Visible;
+                    Num3.Visibility = Visibility.Visible;
+                    Num2.Visibility = Visibility.Visible;
+                    Num1.Visibility = Visibility.Hidden;
+                    txtCombinado.Text = "";
+                    txtDirecto.Text = "";
+                    txtPata.Text = "";
+                    txtUna.Text = "";
+                    Num1.Text = "";
+                    Num2.Text = "";
+                    Num3.Text = "";
+                    Num4.Text = "";
+                    txtCombinado.Visibility = Visibility.Visible;
+                    txtDirecto.Visibility = Visibility.Visible;
+                    txtPata.Visibility = Visibility.Visible;
+                    txtUna.Visibility = Visibility.Visible;
+                }
+                if (C2CheckSi.Visibility == Visibility.Visible)
+                {
+                    BlockC1.Visibility = Visibility.Hidden;
+                    BlockC2.Visibility = Visibility.Hidden;
+                    BlockC3.Visibility = Visibility.Visible;
+                    BlockC4.Visibility = Visibility.Visible;
+                    Num4.Visibility = Visibility.Visible;
+                    Num3.Visibility = Visibility.Visible;
+                    Num2.Visibility = Visibility.Hidden;
+                    Num1.Visibility = Visibility.Hidden;
+                    txtCombinado.Text = "";
+                    txtDirecto.Text = "";
+                    txtPata.Text = "";
+                    txtUna.Text = "";
+                    Num1.Text = "";
+                    Num2.Text = "";
+                    Num3.Text = "";
+                    Num4.Text = "";
+                    txtCombinado.Visibility = Visibility.Hidden;
+                    txtDirecto.Visibility = Visibility.Hidden;
+                    txtPata.Visibility = Visibility.Visible;
+                    txtUna.Visibility = Visibility.Visible;
+                }
+                if (C1CheckSi.Visibility == Visibility.Visible)
+                {
+                    BlockC1.Visibility = Visibility.Hidden;
+                    BlockC2.Visibility = Visibility.Visible;
+                    BlockC3.Visibility = Visibility.Visible;
+                    BlockC4.Visibility = Visibility.Visible;
+                    Num4.Visibility = Visibility.Visible;
+                    Num3.Visibility = Visibility.Hidden;
+                    Num2.Visibility = Visibility.Hidden;
+                    Num1.Visibility = Visibility.Hidden;
+                    Num1.Text = "";
+                    Num2.Text = "";
+                    Num3.Text = "";
+                    Num4.Text = "";
+                    txtCombinado.Text = "";
+                    txtDirecto.Text = "";
+                    txtPata.Text = "";
+                    txtUna.Text = "";
+                    txtCombinado.Visibility = Visibility.Hidden;
+                    txtDirecto.Visibility = Visibility.Hidden;
+                    txtPata.Visibility = Visibility.Hidden;
+                    txtUna.Visibility = Visibility.Visible;
+                }
+            }
+            catch(Exception ex)
+            {
+                Error.SaveLogError(MethodBase.GetCurrentMethod().Name, this.GetType().Name, ex, ex.ToString());
+            }
+        }
+
+        private void Btn_NumRandom_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Btn_NumRandom(sender, e);
+        }
+
+        private void KeyboardTouch_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            KeyboardTouch(sender, e);
+        }
+
+        private void KeyboardBtnDelete_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            KeyboardBtnDelete(sender, e);
+        }
+
+        private void KeyboardBtnDeleteAll_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            KeyboardBtnDeleteAll(sender, e);
+        }
+
+        private void BtnAddNum_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            BtnAddNum(sender, e);
+        }
     }
 
     internal class SelectNumViewModel : INotifyPropertyChanged

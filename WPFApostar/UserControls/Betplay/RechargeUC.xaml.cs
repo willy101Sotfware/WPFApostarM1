@@ -57,7 +57,7 @@ namespace WPFApostar.UserControls.Betplay
             });
         }
 
-        private void Keyboard_TouchDown(object sender, TouchEventArgs e)
+        private void Keyboard_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace WPFApostar.UserControls.Betplay
             }
         }
 
-        private void Btn_DeleteTouchDown(object sender, TouchEventArgs e)
+        private void Btn_DeletePreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace WPFApostar.UserControls.Betplay
             }
         }
 
-        private void Btn_DeleteAllTouchDown(object sender, TouchEventArgs e)
+        private void Btn_DeleteAllPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             try
             {
@@ -323,9 +323,8 @@ namespace WPFApostar.UserControls.Betplay
 
 
 
-        private void Btn_ContinuarTouchDown(object sender, EventArgs e)
+        private void Btn_ContinuarPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            
             SetCallBacksNull();
             timer.CallBackStop?.Invoke(1);
 
@@ -341,7 +340,7 @@ namespace WPFApostar.UserControls.Betplay
             }
         }
 
-        private void Btn_CancelarTouchDown(object sender, EventArgs e)
+        private void Btn_CancelarPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             SetCallBacksNull();
             timer.CallBackStop?.Invoke(1);
