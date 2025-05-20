@@ -361,17 +361,16 @@ namespace WPFApostar.UserControls.Chance
             txtValidaciones.Text = "";
         }
 
-        private void Btn_CancelarTouchDown(object sender, EventArgs e)
+        private void Btn_CancelarPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             SetCallBacksNull();
             timer.CallBackStop?.Invoke(1);
             Utilities.navigator.Navigate(UserControlView.Menu);
         }
 
-        private void Btn_ContinuarTouchDown(object sender, EventArgs e)
+        private void Btn_ContinuarPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             DisableView();
-
             SetCallBacksNull();
             timer.CallBackStop?.Invoke(1);
 
@@ -383,14 +382,8 @@ namespace WPFApostar.UserControls.Chance
                 return;
             }
 
-       //     SetCallBacksNull();
-     //       timer.CallBackStop?.Invoke(1);
-       //     Transaction.Fecha = selectedDateDT.ToString("dd/MM/yyyy"); // Todas las fechas se deben consultar asi
             Transaction.ListaLoteriasSeleccionadas = lstLotteriesModel.Where(lot => lot.IsSelected).ToList();
-     
-            Utilities.navigator.Navigate(UserControlView.Apuesta,Transaction);
-            //   GetLotteries();
-
+            Utilities.navigator.Navigate(UserControlView.Apuesta, Transaction);
         }
 
         private void Btn_SelectDay(object sender, TouchEventArgs e)
@@ -415,6 +408,13 @@ namespace WPFApostar.UserControls.Chance
         {
    //         SetCallBacksNull();
     //        timer.CallBackStop?.Invoke(1);
+            Utilities.navigator.Navigate(UserControlView.Menu);
+        }
+
+        private void BtnAtras_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SetCallBacksNull();
+            timer.CallBackStop?.Invoke(1);
             Utilities.navigator.Navigate(UserControlView.Menu);
         }
 

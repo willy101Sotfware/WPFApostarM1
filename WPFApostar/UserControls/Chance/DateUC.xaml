@@ -62,7 +62,7 @@
 
             <Image Source="/Images/Buttons/BtnAtras.png"
                    HorizontalAlignment="Left"
-                   TouchDown="BtnAtras_TouchDown"
+                   PreviewMouseDown="BtnAtras_PreviewMouseDown"
                    VerticalAlignment="Top" Height="108" Width="112" Margin="76,51,0,0"/>
 
             <TextBlock 
@@ -105,7 +105,7 @@
 
             <Image Source="/Images/SuperChance/Buttons/BtnAgregar.png"
                    HorizontalAlignment="Left"
-                   TouchDown="Btn_ContinuarTouchDown"
+                   PreviewMouseDown="Btn_ContinuarPreviewMouseDown"
                    Visibility="Hidden"
                    MouseDown="Btn_ContinueMouse"
                    VerticalAlignment="Top" Width="228" Height="73" Margin="430,686,0,0" RenderTransformOrigin="0.107,0.617"/>
@@ -113,21 +113,21 @@
 
             <Image Source="/Images/SuperChance/Backgrounds/BgDia.png"
                    HorizontalAlignment="Center"
-                   TouchDown="SelectDay_TouchDown"
+                   PreviewMouseDown="SelectDay_TouchDown"
                    x:Name="bgDia1"
                    Tag="Fecha1"
                    VerticalAlignment="Top" Width="228" Height="247" Margin="165,270,687,0"/>
 
             <Image Source="/Images/SuperChance/Backgrounds/BgDia.png"
                    HorizontalAlignment="Center"
-                   TouchDown="SelectDay_TouchDown"
+                   PreviewMouseDown="SelectDay_TouchDown"
                    x:Name="bgDia2"
                    Tag="Fecha2"
                    VerticalAlignment="Top" Width="228" Height="247" Margin="426,270,426,0"/>
 
             <Image Source="/Images/SuperChance/Backgrounds/BgFechaS.png"
                    HorizontalAlignment="Center"
-                   TouchDown="SelectDay_TouchDown"
+                   PreviewMouseDown="SelectDay_TouchDown"
                    x:Name="Dia1S"
                    Visibility="Hidden"
                    Tag="Fecha1"
@@ -135,7 +135,7 @@
 
             <Image Source="/Images/SuperChance/Backgrounds/BgFechaS.png"
                    HorizontalAlignment="Center"
-                   TouchDown="SelectDay_TouchDown"
+                   PreviewMouseDown="SelectDay_TouchDown"
                    x:Name="Dia2S"
                       Visibility="Hidden" 
                    Tag="Fecha2"
@@ -143,7 +143,7 @@
 
             <Image Source="/Images/SuperChance/Backgrounds/BgDia.png"
                    HorizontalAlignment="Center"
-                   TouchDown="SelectDay_TouchDown"
+                   PreviewMouseDown="SelectDay_TouchDown"
                    x:Name="bgDia3"
                    Tag="Fecha3"
                    VerticalAlignment="Top" Width="228" Height="247" Margin="687,270,165,0"/>
@@ -158,7 +158,7 @@
             <Image Source="/Images/SuperChance/Others/txtDia.png"
                    HorizontalAlignment="Left"
                    Tag="Fecha1"
-                   TouchDown="SelectDay_TouchDown"
+                   PreviewMouseDown="SelectDay_TouchDown"
                    VerticalAlignment="Top" Width="75" Height="38" Margin="241,292,0,0"/>
 
 
@@ -166,13 +166,13 @@
             <Image Source="/Images/SuperChance/Others/txtDia.png"
                    HorizontalAlignment="Left"
                    Tag="Fecha3"
-                   TouchDown="SelectDay_TouchDown"                   
+                   PreviewMouseDown="SelectDay_TouchDown"                   
                    VerticalAlignment="Top" Width="76" Height="38" Margin="764,292,0,0"/>
 
             <Image Source="/Images/SuperChance/Others/txtDia.png"
                    HorizontalAlignment="Left"
                    Tag="Fecha2"
-                   TouchDown="SelectDay_TouchDown"
+                   PreviewMouseDown="SelectDay_TouchDown"
                    VerticalAlignment="Top" Width="75" Height="38" Margin="500,292,0,0"/>
 
             <Label Content="HOY" 
@@ -181,7 +181,7 @@
                    VerticalAlignment="Top"
                    HorizontalContentAlignment="Center"
                    Height="84" 
-                   MouseDown="SelectDay_TouchDown"
+                   PreviewMouseDown="SelectDay_TouchDown"
                     Tag="Fecha1"
                    x:Name="dia_mes1"
                    Width="155"
@@ -194,7 +194,7 @@
                    Margin="467,348,0,0"
                    VerticalAlignment="Top"
                    Height="84" 
-                   TouchDown="SelectDay_TouchDown"
+                   PreviewMouseDown="SelectDay_TouchDown"
                     Tag="Fecha2"
                    x:Name="dia_mes2"
                  HorizontalContentAlignment="Center" 
@@ -209,7 +209,7 @@
                    VerticalAlignment="Top"
                    Height="84" 
                    x:Name="dia_mes3"
-                   TouchDown="SelectDay_TouchDown"
+                   PreviewMouseDown="SelectDay_TouchDown"
                     Tag="Fecha3"
                    HorizontalContentAlignment="Center"
                    Width="156"
@@ -224,7 +224,7 @@
                    HorizontalContentAlignment="Center"
                    Height="61" 
                    x:Name="mes_ano3"
-                   TouchDown="SelectDay_TouchDown"
+                   PreviewMouseDown="SelectDay_TouchDown"
                    Tag="Fecha3"
                    Width="198"
                    Foreground="White"
@@ -238,7 +238,7 @@
                    Height="61" 
                    x:Name="mes_ano2"
                    Tag="Fecha2"
-                   TouchDown="SelectDay_TouchDown"
+                   PreviewMouseDown="SelectDay_TouchDown"
                    Width="189"
                    Foreground="White"
                    HorizontalContentAlignment="Center"
@@ -252,7 +252,7 @@
                    Height="61" 
                    HorizontalContentAlignment="Center"
                    x:Name="mes_ano1"
-                   MouseDown="SelectDay_TouchDown"
+                   PreviewMouseDown="SelectDay_TouchDown"
                    Tag="Fecha1"
                    Width="204"
                    Foreground="White"
@@ -338,7 +338,7 @@
                 <Image Source="/Images/Buttons/btnCancelar.png" 
                    Margin="215,4,0,0"
                    HorizontalAlignment="Left"
-                   TouchDown="Btn_CancelarTouchDown"
+                   PreviewMouseDown="Btn_CancelarPreviewMouseDown"
                    x:Name="BtnCancelar"
                    VerticalAlignment="Top" Height="77" Width="221"/>
 
@@ -346,8 +346,7 @@
                 <Image Source="/Images/Buttons/BtnContinuar.png" 
                    Margin="600,9,0,0"
                    HorizontalAlignment="Left"
-                   TouchDown="Btn_ContinuarTouchDown"
-                   
+                   PreviewMouseDown="Btn_ContinuarPreviewMouseDown"
                    VerticalAlignment="Top" Height="66" Width="232"/>
 
 
