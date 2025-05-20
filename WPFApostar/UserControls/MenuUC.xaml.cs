@@ -25,16 +25,28 @@ namespace WPFApostar.UserControls
             Transaction.productSelect = new ProductSelect();
         }
 
-        private void Btn_JugarTouchDown(object sender, EventArgs e)
+        private void Btn_JugarPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             var control = sender as FrameworkElement;
             HandleJugarAction(control);
         }
 
-        private void Btn_JugarMouseDown(object sender, MouseButtonEventArgs e)
+        private void Btn_ChancePreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             var control = sender as FrameworkElement;
-            HandleJugarAction(control);
+            HandleChanceAction(control);
+        }
+
+        private void Btn_RecaudoPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var control = sender as FrameworkElement;
+            HandleRecaudoAction(control);
+        }
+
+        private void Btn_RechargePreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var control = sender as FrameworkElement;
+            HandleRechargeAction(control);
         }
 
         private void HandleJugarAction(FrameworkElement control)
@@ -59,18 +71,6 @@ namespace WPFApostar.UserControls
                 Utilities.ShowModal("los servicios de Apostar no estan disponibles, intenta nuevamente", EModalType.Error);
                 Utilities.navigator.Navigate(UserControlView.Menu);
             }
-        }
-
-        private void Btn_ChanceTouchDown(object sender, EventArgs e)
-        { 
-            var control = sender as FrameworkElement;
-            HandleChanceAction(control);
-        }
-
-        private void Btn_ChanceMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            var control = sender as FrameworkElement;
-            HandleChanceAction(control);
         }
 
         private void HandleChanceAction(FrameworkElement control)
@@ -194,18 +194,6 @@ namespace WPFApostar.UserControls
             }
         }
 
-        private void Btn_RecaudoTouchDown(object sender, TouchEventArgs e)
-        {
-            var control = sender as FrameworkElement;
-            HandleRecaudoAction(control);
-        }
-
-        private void Btn_RecaudoMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            var control = sender as FrameworkElement;
-            HandleRecaudoAction(control);
-        }
-
         private void HandleRecaudoAction(FrameworkElement control)
         {
             try
@@ -259,18 +247,6 @@ namespace WPFApostar.UserControls
             }
         }
 
-
-        private void Btn_RechargeTouchDown(object sender, EventArgs e)
-        {
-            var control = sender as FrameworkElement;
-            HandleRechargeAction(control);
-        }
-
-        private void Btn_RechargeMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            var control = sender as FrameworkElement;
-            HandleRechargeAction(control);
-        }
 
         private void HandleRechargeAction(FrameworkElement control)
         {

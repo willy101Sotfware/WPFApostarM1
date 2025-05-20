@@ -13,8 +13,6 @@
         <Style x:Key="DesignView"
                TargetType="ListViewItem"
                >
-            <EventSetter Event="PreviewTouchDown"
-                        Handler="Btn_SelectOperator" />
             <EventSetter Event="PreviewMouseDown"
                         Handler="Btn_SelectOperator" />
             <Setter Property="Template">
@@ -127,9 +125,9 @@
                     <ListView 
                     x:Name="lvOperator"
                     ItemContainerStyle="{DynamicResource DesignView}"
-                    ItemsSource="{Binding}"            
-                    SelectionMode="Single" 
-                    Background="{x:Null}" 
+                    ItemsSource="{Binding}"
+                    SelectionMode="Single"
+                    Background="{x:Null}"
                     Margin="-54,-284,-54,-266">
 
                         <ItemsControl.ItemsPanel>
@@ -177,8 +175,7 @@
 
                 <Image Source="/Images/Buttons/btnCancelar.png"
                    HorizontalAlignment="Center"
-                   TouchDown="BtnCancelar_TouchDown"
-                   MouseDown="BtnCancelar_PreviewMouseDown"
+                   PreviewMouseDown="BtnCancelar_PreviewMouseDown"
                    Cursor="Hand"
                    VerticalAlignment="Top" Height="105" Width="362" Margin="0,1248,0,0"/>
 

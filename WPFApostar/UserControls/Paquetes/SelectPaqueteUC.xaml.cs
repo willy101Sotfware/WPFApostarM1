@@ -50,30 +50,20 @@ namespace WPFApostar.UserControls.Paquetes
         }
 
 
-        private void Btn_SelectPacket(object sender, EventArgs e)
+        private void Btn_SelectPacketPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-
-
             try
             {
-
                 DisableView();
-
                 SetCallBacksNull();
                 timer.CallBackStop?.Invoke(1);
                 var data = sender as ListViewItem;
                 SelectedOperator = (OperatorsViewModel)data.Content;
-
-
                 Transaction.SelectOperator.idOperador = SelectedOperator.idPaqueteOperador;
                 Transaction.SelectOperator.nomPaquete = SelectedOperator.nomPaquete;
                 Transaction.SelectOperator.nomCorto = SelectedOperator.abreviatura;
                 Transaction.SelectOperator.valorComercial = Convert.ToDouble(SelectedOperator.valorComercial.Replace("$", ""));
-
-
                 Utilities.navigator.Navigate(UserControlView.DigitarNumero, Transaction);
-
-
             }
             catch (Exception ex)
             {
@@ -81,20 +71,17 @@ namespace WPFApostar.UserControls.Paquetes
             }
         }
 
-
-        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            await LoadOperatorAsync();
-        }
-
-
-        private void BtnCancelar_TouchDown(object sender, TouchEventArgs e)
+        private void BtnCancelar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             SetCallBacksNull();
             timer.CallBackStop?.Invoke(1);
             Utilities.navigator.Navigate(UserControlView.Menu);
         }
 
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await LoadOperatorAsync();
+        }
 
 
         private async Task LoadOperatorAsync()

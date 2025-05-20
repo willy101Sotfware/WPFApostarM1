@@ -13,9 +13,8 @@
         <Style x:Key="DesignView"
                TargetType="ListViewItem"
                >
-            <EventSetter Event="TouchDown"
-             Handler="Btn_SelectPacket"
-                                         />
+            <EventSetter Event="PreviewMouseDown"
+             Handler="Btn_SelectPacketPreviewMouseDown" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
@@ -204,8 +203,9 @@
 
                 <Image  Source="/Images/Buttons/btnCancelar.png"
                    HorizontalAlignment="Center"
-               x:Name="BtnCancelar"
-                TouchDown="BtnCancelar_TouchDown"
+                   x:Name="BtnCancelar"
+                   PreviewMouseDown="BtnCancelar_PreviewMouseDown"
+                   Cursor="Hand"
                    VerticalAlignment="Top" Width="352" Height="111" Margin="0,1264,0,0"/>
 
 

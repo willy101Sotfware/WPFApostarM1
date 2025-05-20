@@ -28,8 +28,7 @@
             <Image
             Source="/Images/Buttons/BtnBetPlay.png" 
             Margin="548,485,62,927"
-            TouchDown="Btn_JugarTouchDown"
-            MouseDown="Btn_JugarMouseDown"
+            PreviewMouseDown="Btn_JugarPreviewMouseDown"
             Cursor="Hand"
             />
 
@@ -37,16 +36,14 @@
             Source="/Images/Buttons/BtnChance.png" 
             Margin="51,1100,590,312"
             Visibility="Visible"
-            TouchDown="Btn_ChanceTouchDown"
-            MouseDown="Btn_ChanceMouseDown"
+            PreviewMouseDown="Btn_ChancePreviewMouseDown"
             Cursor="Hand"
             />
 
             <Image
             Source="/Images/Buttons/BtnRecaudo.png" 
             Visibility="Hidden"
-            TouchDown="Btn_RecaudoTouchDown"
-            MouseDown="Btn_RecaudoMouseDown"
+            PreviewMouseDown="Btn_RecaudoPreviewMouseDown"
             Cursor="Hand"
             Margin="67,960,499,512"
             />
@@ -54,8 +51,7 @@
             <Image Source="/Images/Buttons/BotonPaquetes.png" 
                 Margin="71,485,0,0"
                 HorizontalAlignment="Left"
-                TouchDown="Btn_RechargeTouchDown"
-                MouseDown="Btn_RechargeMouseDown"
+                PreviewMouseDown="Btn_RechargePreviewMouseDown"
                 Cursor="Hand"
                 VerticalAlignment="Top" Height="508" Width="431">
             </Image>
