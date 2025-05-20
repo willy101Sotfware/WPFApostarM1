@@ -349,5 +349,94 @@ namespace WPFApostar.UserControls.Paquetes
         {
 
         }
+
+        private void Keyboard_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                Image image = (Image)sender;
+                string tag = image.Tag.ToString();
+
+                if (txtcedula)
+                {
+                    TxtNumCel.Text += tag;
+                }
+
+                if (txtvalidar)
+                {
+                    TxtVal.Text += tag;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo del error
+                throw ex;
+            }
+        }
+
+        private void Btn_DeletePreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (txtcedula && TxtNumCel.Text.Length > 0)
+                {
+                    TxtNumCel.Text = TxtNumCel.Text.Remove(TxtNumCel.Text.Length - 1);
+                }
+
+                if (txtvalidar && TxtVal.Text.Length > 0)
+                {
+                    TxtVal.Text = TxtVal.Text.Remove(TxtVal.Text.Length - 1);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo del error
+                throw ex;
+            }
+        }
+
+        private void Btn_DeleteAllPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (txtcedula)
+                {
+                    TxtNumCel.Text = string.Empty;
+                }
+
+                if (txtvalidar)
+                {
+                    TxtVal.Text = string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo del error
+                throw ex;
+            }
+        }
+
+        private void Btn_CancelarPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SetCallBacksNull();
+            timer.CallBackStop?.Invoke(1);
+            Utilities.navigator.Navigate(UserControlView.Menu);
+        }
+
+        private void Btn_ContinuarPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SetCallBacksNull();
+            timer.CallBackStop?.Invoke(1);
+            if (validateNum())
+            {
+                Transaction.NumOperator = TxtNumCel.Text;
+                Utilities.navigator.Navigate(UserControlView.ResumenPaquete, Transaction);
+            }
+            else
+            {
+                Utilities.ShowModal("Por favor verifica la información ingresada", EModalType.Error);
+                ActivateTimer();
+            }
+        }
     }
 }
