@@ -8,6 +8,7 @@ using System.IO;
 using LotteriesViewModel = WPFApostar.Models.LotteriesViewModel;
 using WPFApostar.Resources;
 using WPFApostar.Classes.UseFull;
+using System.Windows.Input;
 
 namespace WPFApostar.UserControls.Chance
 {
@@ -311,17 +312,24 @@ namespace WPFApostar.UserControls.Chance
         {
             SetCallBacksNull();
             timer.CallBackStop?.Invoke(1);
-            Utilities.navigator.Navigate(UserControlView.Menu);
+            Utilities.navigator.Navigate(UserControlView.Apuesta, Transaction);
         }
 
         private void Btn_Continue(object sender, EventArgs e)
         {
-            DisableView();
-
             SetCallBacksNull();
             timer.CallBackStop?.Invoke(1);
-
             SendData();
+        }
+
+        private void Btn_Cancel_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Btn_Cancel(sender, e);
+        }
+
+        private void Btn_Continue_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Btn_Continue(sender, e);
         }
 
         private void ActivateTimer()

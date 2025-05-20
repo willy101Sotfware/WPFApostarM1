@@ -103,12 +103,12 @@
 
             <Image Source="/Images/SuperChance/Buttons/BtnConfirmarA.png"
                    HorizontalAlignment="Left"
-                   TouchDown="Btn_Continue"
+                   PreviewMouseDown="Btn_Continue_PreviewMouseDown"
                    VerticalAlignment="Top" Height="72" Width="324" Margin="596,1591,0,0"/>
 
             <Image Source="/Images/SuperChance/Buttons/BtnCancelarA.png"
                    HorizontalAlignment="Left"
-                   TouchDown="Btn_Cancel"
+                   PreviewMouseDown="Btn_Cancel_PreviewMouseDown"
                    VerticalAlignment="Top" Height="72" Width="324" Margin="156,1591,0,0"/>
 
             <Image Source="/WPFApostar;component/Images/SuperChance/Others/TxtResumen.png"
@@ -270,7 +270,6 @@
                      Height="48" Background="{x:Null}" 
                      BorderBrush="{x:Null}"
                      SelectionBrush="{x:Null}"/>
-
 
             <!--End Data Numeros-->
 

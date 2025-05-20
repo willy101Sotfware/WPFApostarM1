@@ -1,7 +1,0 @@
-<Project>
-  <PropertyGroup>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
-    <NoWarn>CS0246;CS0579;SYSLIB0022;CS8981</NoWarn>
-  </PropertyGroup>
-</Project>
