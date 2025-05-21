@@ -18,23 +18,20 @@ namespace WPFApostar.UserControls.Recaudo
         private PeripheralController _peripherals;
         public ReturnMoneyReUC(Transaction transaction)
         {
-
             AdminPayPlus.SaveLog("ReturnMoneyReUC", "entrando al usercontrol", "OK", "", transaction);
-
 
             InitializeComponent();
 
             this.transaction = transaction;
 
-            _peripherals = PeripheralController.Instance;
-            _peripherals.CashDispensed += OnCashDispensed;
-            _peripherals.DispenserReject += OnDispenserReject;
-            _peripherals.PeripheralError += OnPeripheralError;
-
-
-            this.Unloaded += OnUnloaded;
-
-
+            if (!Utilities.GetConfiguration("noPeripherals").Equals("true"))
+            {
+                _peripherals = PeripheralController.Instance;
+                _peripherals.CashDispensed += OnCashDispensed;
+                _peripherals.DispenserReject += OnDispenserReject;
+                _peripherals.PeripheralError += OnPeripheralError;
+                this.Unloaded += OnUnloaded;
+            }
 
             if (transaction.StatePay == "Cancelada")
             {
@@ -47,7 +44,6 @@ namespace WPFApostar.UserControls.Recaudo
                 AdminPayPlus.SaveLog("ReturnMoneyReUC", "entrando al usercontrol estado de transaccion", "OK", transaction.StatePay.ToString(), transaction);
                 Return(transaction.Payment.ValorSobrante);
             }
-
         }
 
         #region Methods new
@@ -223,7 +219,6 @@ namespace WPFApostar.UserControls.Recaudo
         {
             Utilities.CloseModal();
 
-            // init.CleanValues();
             AdminPayPlus.SaveLog("ReturnMoneyReUC", "Entrando a la ejecucion savepay", "OK", notify.ToString(), transaction);
             if (notify)
             {

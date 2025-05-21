@@ -21,20 +21,18 @@ namespace WPFApostar.UserControls.Betplay
         {
             AdminPayPlus.SaveLog("ReturnMoneyBetplayUC", "entrando al user control", "OK", "", transaction);
 
-
             InitializeComponent();
 
             this.transaction = transaction;
 
-            _peripherals = PeripheralController.Instance;
-            _peripherals.CashDispensed += OnCashDispensed;
-            _peripherals.DispenserReject += OnDispenserReject;
-            _peripherals.PeripheralError += OnPeripheralError;
-
-
-            this.Unloaded += OnUnloaded;
-
-
+            if (!Utilities.GetConfiguration("noPeripherals").Equals("true"))
+            {
+                _peripherals = PeripheralController.Instance;
+                _peripherals.CashDispensed += OnCashDispensed;
+                _peripherals.DispenserReject += OnDispenserReject;
+                _peripherals.PeripheralError += OnPeripheralError;
+                this.Unloaded += OnUnloaded;
+            }
 
             if (transaction.StatePay == "Cancelada")
             {
@@ -47,43 +45,34 @@ namespace WPFApostar.UserControls.Betplay
                 AdminPayPlus.SaveLog("ReturnMoneyBetplayUC", "entrando al user control estado de transaccion", "OK", transaction.StatePay.ToString(), transaction);
                 Return(transaction.Payment.ValorSobrante);
             }
-
-
         }
 
         #region Methods new
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
-
-            _peripherals.CashDispensed -= OnCashDispensed;
-            _peripherals.DispenserReject -= OnDispenserReject;
-            _peripherals.PeripheralError -= OnPeripheralError;
-
+            if (!Utilities.GetConfiguration("noPeripherals").Equals("true"))
+            {
+                _peripherals.CashDispensed -= OnCashDispensed;
+                _peripherals.DispenserReject -= OnDispenserReject;
+                _peripherals.PeripheralError -= OnPeripheralError;
+            }
         }
-
 
         private void OnPeripheralError(Exception ex)
         {
             //TODO: Evaluar Si es necesario reportar errores de perifericos al Dashboard por que ya los errores de perifericos se reportan internamente
         }
 
-
         private async void OnCashDispensed(decimal totalDispensed, Dictionary<int, int> details)
         {
-
-
             AdminPayPlus.SaveLog("ReturnMoneyUserControl", "entrando a la ejecucion OnCashDispensed", "OK", totalDispensed.ToString(), transaction);
 
             transaction.Payment.ValorDispensado = totalDispensed;
 
-
             Utilities.CloseModal();
 
             SendDispenseDetails(details);
-
-            // paymentViewModel.ValorDispensado = totalout;
-            //transaction.StateReturnMoney = false;
 
             decimal valorOut = transaction.Payment.ValorSobrante - transaction.Payment.ValorDispensado;
             decimal valorOut2 = transaction.Payment.ValorIngresado - transaction.Payment.ValorDispensado;
@@ -99,7 +88,6 @@ namespace WPFApostar.UserControls.Betplay
                 {
                     AdminPayPlus.SaveLog("ReturnMoneyBetplayUC", "OnCashDispensed, entrando a la condicion transaction.Payment.ValorDispensado < transaction.Payment.ValorIngresado", "OK", "", transaction);
 
-
                     Utilities.CloseModal();
                     transaction.StateReturnMoney = false;
                     var faltante = transaction.Payment.ValorIngresado - transaction.Payment.ValorDispensado;
@@ -112,13 +100,11 @@ namespace WPFApostar.UserControls.Betplay
                 {
                     AdminPayPlus.SaveLog("ReturnMoneyBetplayUC", "OnCashDispensed, entrando a la condiciontransaction.Payment.ValorDispensado == transaction.Payment.ValorIngresado", "OK", "", transaction);
 
-
                     Utilities.CloseModal();
                     transaction.StateReturnMoney = true;
                     transaction.StatePay = "Cancelada";
                     transaction.State = ETransactionState.Cancel;
                     savepay(NotifyStatus);
-
                 }
             }
             else if (transaction.StatePay == "Aprobado")
@@ -127,8 +113,6 @@ namespace WPFApostar.UserControls.Betplay
                 NotifyStatus = true;
                 if (transaction.Payment.ValorDispensado < transaction.Payment.ValorSobrante)
                 {
-
-
                     AdminPayPlus.SaveLog("ReturnMoneyBetplayUC", "OnCashDispensed, entrando a la condicion transaction.Payment.ValorDispensado < transaction.Payment.ValorIngresado", "OK", "", transaction);
 
                     Utilities.CloseModal();
@@ -141,22 +125,16 @@ namespace WPFApostar.UserControls.Betplay
                 }
                 else if (transaction.Payment.ValorDispensado == transaction.Payment.ValorSobrante)
                 {
-
                     AdminPayPlus.SaveLog("ReturnMoneyBetplayUC", "OnCashDispensed, entrando a la condicion transaction.Payment.ValorDispensado == transaction.Payment.ValorSobrante", "OK", "", transaction);
-
 
                     Utilities.CloseModal();
                     transaction.StateReturnMoney = true;
                     transaction.StatePay = "Aprobado";
                     transaction.State = ETransactionState.Success;
                     savepay(NotifyStatus);
-
                 }
-
-
             }
         }
-
 
         private void Return(decimal returnValue)
         {
@@ -174,7 +152,6 @@ namespace WPFApostar.UserControls.Betplay
                 Utilities.navigator.Navigate(UserControlView.Finish, transaction);
             }
         }
-
 
         private string GetDetailsString(Dictionary<int, int> details, int[] denominations, string prefix)
         {
@@ -214,17 +191,13 @@ namespace WPFApostar.UserControls.Betplay
 
         private void OnDispenserReject(Dictionary<int, int> rejectData)
         {
-
             SendDispenseDetails(rejectData, isReject: true);
-
         }
-
 
         public void savepay(bool notify)
         {
             Utilities.CloseModal();
 
-            // init.CleanValues();
             AdminPayPlus.SaveLog("ReturnMoneyBetplayUC", "Entrando a la ejecucion savepay", "OK", notify.ToString(), transaction);
             if (notify)
             {
@@ -257,7 +230,5 @@ namespace WPFApostar.UserControls.Betplay
         }
 
         #endregion
-
-
     }
 }
