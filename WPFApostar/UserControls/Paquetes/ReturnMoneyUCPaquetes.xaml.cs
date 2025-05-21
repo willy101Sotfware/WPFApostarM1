@@ -160,10 +160,19 @@ namespace WPFApostar.UserControls.Paquetes
 
         private void Return(decimal returnValue)
         {
-
-            _peripherals.StartDispenser(returnValue);
-
-
+            if (!Utilities.GetConfiguration("noPeripherals").Equals("true"))
+            {
+                _peripherals.StartDispenser(returnValue);
+            }
+            else
+            {
+                // En modo prueba, simulamos que se dispensó todo el valor sin enviar al API
+                transaction.Payment.ValorDispensado = returnValue;
+                transaction.StateReturnMoney = true;
+                transaction.StatePay = "Aprobado";
+                transaction.State = ETransactionState.Success;
+                Utilities.navigator.Navigate(UserControlView.FinishPaquetes, transaction);
+            }
         }
 
 
@@ -211,36 +220,35 @@ namespace WPFApostar.UserControls.Paquetes
             Utilities.CloseModal();
 
             // init.CleanValues();
-            AdminPayPlus.SaveLog("ReturnMoneyPaquetesUC", "Entrando a la ejecucion savepay", "OK", notify.ToString(), transaction);
+            AdminPayPlus.SaveLog("ReturnMoneyUCPaquetes", "Entrando a la ejecucion savepay", "OK", notify.ToString(), transaction);
             if (notify)
             {
-                AdminPayPlus.SaveLog("ReturnMoneyPaquetesUC", "SavePay, transaccion aprobada, navegando al finish", "OK", "", transaction);
+                AdminPayPlus.SaveLog("ReturnMoneyUCPaquetes", "SavePay, transaccion aprobada, navegando al SuccesPaquetes", "OK", "", transaction);
 
-           
-                Utilities.navigator.Navigate(UserControlView.FinishPaquetes, transaction);
+                if (!Utilities.GetConfiguration("noPeripherals").Equals("true"))
+                {
+                    AdminPayPlus.UpdateTransactionPaquetes(transaction);
+                }
+
+                Utilities.navigator.Navigate(UserControlView.SuccesPaquetes, transaction);
             }
             else
             {
-                AdminPayPlus.SaveLog("ReturnMoneyPaquetesUC", "SavePay, transaccion Cancelada, ", "OK", "", transaction);
-
-     
-              
+                AdminPayPlus.SaveLog("ReturnMoneyUCPaquetes", "SavePay, transaccion Cancelada, ", "OK", "", transaction);
 
                 transaction.State = ETransactionState.Cancel;
-
                 transaction.StatePay = "Cancelada";
 
+                if (!Utilities.GetConfiguration("noPeripherals").Equals("true"))
+                {
+                    AdminPayPlus.SaveLog("ReturnMoneyUCPaquetes", "FinishCancelNotPay", "OK", string.Concat("ID Transaccion:", transaction.IdTransactionAPi, "/n", "Estado Transaccion:", transaction.StatePay.ToString(), "/n", "Monto:", transaction.Amount.ToString(), "/n", "Valor Dispensado:", transaction.Payment.ValorDispensado.ToString(), "/n", "Valor Ingresado:", transaction.Payment.ValorIngresado.ToString()), transaction);
+                    AdminPayPlus.UpdateTransactionPaquetes(transaction);
+                }
 
-                AdminPayPlus.SaveLog("ReturnMoneyPaquetesUC", "FinishCancelNotPay", "OK", string.Concat("ID Transaccion:", transaction.IdTransactionAPi, "/n", "Estado Transaccion:", transaction.StatePay.ToString(), "/n", "Monto:", transaction.Amount.ToString(), "/n", "Valor Dispensado:", transaction.Payment.ValorDispensado.ToString(), "/n", "Valor Ingresado:", transaction.Payment.ValorIngresado.ToString()), transaction);
-
-
-                AdminPayPlus.UpdateTransactionPaquetes(transaction);
-
-                AdminPayPlus.SaveLog("ReturnMoneyPaquetesUC", "Saliendo de la ejecucion savepay false", "OK", "", transaction);
+                AdminPayPlus.SaveLog("ReturnMoneyUCPaquetes", "Saliendo de la ejecucion savepay false", "OK", "", transaction);
 
                 Utilities.navigator.Navigate(UserControlView.Config);
             }
-
         }
 
 
