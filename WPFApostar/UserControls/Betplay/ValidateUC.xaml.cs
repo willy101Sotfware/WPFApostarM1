@@ -56,14 +56,15 @@ namespace WPFApostar.UserControls.Betplay
         }
 
 
-        private void Btn_CancelarTouchDown(object sender, TouchEventArgs e)
+    
+        private void Btn_CancelarPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             SetCallBacksNull();
             timer.CallBackStop?.Invoke(1);
             Utilities.navigator.Navigate(UserControlView.Menu);
         }
 
-        private void Btn_ContinuarTouchDown(object sender, EventArgs e)
+        private void Btn_ContinuarPreviewMouseDown(object sender, EventArgs e)
         {
             DisableView();
 

@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using WPFApostar.Classes;
 using WPFApostar.Domain.Peripherals;
 using WPFApostar.Models;
@@ -146,6 +147,13 @@ namespace WPFApostar.UserControls.Betplay
         private void Btn_CancelarTouchDown(object sender, EventArgs e)
         {
             AdminPayPlus.SaveLog("PaymentUserControl", "Entrando a la ejecucion Btn_CancelarTouchDown", "OK", "", Transaction);
+
+            CancellPay();
+        }
+
+        private void Btn_CancelarPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            AdminPayPlus.SaveLog("PaymentUserControl", "Entrando a la ejecucion Btn_CancelarPreviewMouseDown", "OK", "", Transaction);
 
             CancellPay();
         }

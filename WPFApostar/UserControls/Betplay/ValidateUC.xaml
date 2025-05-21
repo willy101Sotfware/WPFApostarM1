@@ -91,12 +91,15 @@
             <Image Source="/Images/Buttons/btnCancelar.png" 
                    Margin="244,948,0,0"
                    HorizontalAlignment="Left"
-                   TouchDown="Btn_CancelarTouchDown"
+                   PreviewMouseDown="Btn_CancelarPreviewMouseDown"
+                   Cursor="Hand"
                    VerticalAlignment="Top" Height="77" Width="243"/>
 
             <Image Source="/Images/Buttons/btnContinuar.png" 
                    Margin="597,934,0,0"
-                   TouchDown="Btn_ContinuarTouchDown"
+                   TouchDown="Btn_ContinuarPreviewMouseDown"
+                   PreviewMouseDown="Btn_ContinuarPreviewMouseDown"
+                   Cursor="Hand"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top" Height="78" Width="261"/>
 

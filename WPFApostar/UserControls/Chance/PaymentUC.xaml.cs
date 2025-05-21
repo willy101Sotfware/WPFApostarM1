@@ -130,16 +130,15 @@ namespace WPFApostar.UserControls.Chance
             }
         }
 
-    
+
 
         #endregion
 
 
 
-        private void Btn_CancelarTouchDown(object sender, TouchEventArgs e)
+        private void Btn_CancelarPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            AdminPayPlus.SaveLog("PaymentChanceUC", "Entrando a la ejecucion Btn_CancelarTouchDown", "OK", "", Transaction);
-
+            AdminPayPlus.SaveLog("PaymentUC", "Entrando a la ejecucion Btn_CancelarPreviewMouseDown", "OK", "", Transaction);
             CancellPay();
         }
 

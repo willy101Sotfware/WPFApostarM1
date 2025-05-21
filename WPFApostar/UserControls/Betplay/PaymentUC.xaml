@@ -247,7 +247,9 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Margin="102,54,0,0"
-                   TouchDown="Btn_CancelarTouchDown" />
+                   TouchDown="Btn_CancelarTouchDown"
+                   PreviewMouseDown="Btn_CancelarTouchDown"
+                   Cursor="Hand" />
 
 
         </Grid>
