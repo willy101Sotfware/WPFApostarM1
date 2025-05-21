@@ -35,7 +35,7 @@ namespace WPFApostar.UserControls.Chance
             Transaction.DevueltaCorrecta = false;
 
 #if NO_PERIPHERALS
-            // En modo de prueba, agregamos botones de prueba
+            // Modo Desarrollo: Usar botones de prueba
             var testButton1 = new Button { Content = "1000", Width = 100, Height = 50, Margin = new Thickness(5) };
             var testButton2 = new Button { Content = "2000", Width = 100, Height = 50, Margin = new Thickness(5) };
             var testButton3 = new Button { Content = "5000", Width = 100, Height = 50, Margin = new Thickness(5) };
@@ -60,6 +60,7 @@ namespace WPFApostar.UserControls.Chance
 
             MainGrid.Children.Add(testPanel);
 #else
+            // Modo Demo o Producción: Usar periféricos reales
             _peripherals = PeripheralController.Instance;
             _peripherals.CashIn += OnCashIn;
 #endif
@@ -73,9 +74,10 @@ namespace WPFApostar.UserControls.Chance
             OrganizeValues();
 
 #if NO_PERIPHERALS
-            // En modo de prueba, no necesitamos iniciar los periféricos
-            AdminPayPlus.SaveLog("PaymentUC", "OnLoaded", "Modo NO_PERIPHERALS: No se inician periféricos", "", null);
+            // Modo Desarrollo: No iniciar periféricos
+            AdminPayPlus.SaveLog("PaymentUC", "OnLoaded", "Modo Desarrollo: No se inician periféricos", "", null);
 #else
+            // Modo Demo o Producción: Iniciar periféricos
             _peripherals.StartAcceptance(paymentViewModel.PayValue);
 #endif
         }
@@ -83,9 +85,10 @@ namespace WPFApostar.UserControls.Chance
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
 #if NO_PERIPHERALS
-            // En modo de prueba, no necesitamos detener los periféricos
-            AdminPayPlus.SaveLog("PaymentUC", "OnUnloaded", "Modo NO_PERIPHERALS: No se detienen periféricos", "", null);
+            // Modo Desarrollo: No detener periféricos
+            AdminPayPlus.SaveLog("PaymentUC", "OnUnloaded", "Modo Desarrollo: No se detienen periféricos", "", null);
 #else
+            // Modo Demo o Producción: Detener periféricos
             _peripherals.CashIn -= OnCashIn;
 #endif
         }
@@ -96,8 +99,11 @@ namespace WPFApostar.UserControls.Chance
             paymentViewModel.RefreshListDenomination(Convert.ToInt32(value), 1);
             LoadView();
 
-            //SendTransactionDetail(TypeOperation.AP, value);
-            AdminPayPlus.SaveDetailsTransaction(Transaction.IdTransactionAPi, value, 2, 1, "AP", string.Empty);
+            // Solo enviamos al API si NO estamos en modo Demo
+            if (!Utilities.GetConfiguration("noPeripherals").Equals("true"))
+            {
+                AdminPayPlus.SaveDetailsTransaction(Transaction.IdTransactionAPi, value, 2, 1, "AP", string.Empty);
+            }
 
             if (paymentViewModel.ValorIngresado >= paymentViewModel.PayValue)
             {
@@ -106,9 +112,10 @@ namespace WPFApostar.UserControls.Chance
                 _ = Dispatcher.BeginInvoke((Action)delegate { btnCancell.Visibility = Visibility.Collapsed; });
 
 #if NO_PERIPHERALS
-                // En modo de prueba, no necesitamos detener los periféricos
-                AdminPayPlus.SaveLog("PaymentUC", "OnCashIn", "Modo NO_PERIPHERALS: No se detienen periféricos", "", null);
+                // Modo Desarrollo: No detener periféricos
+                AdminPayPlus.SaveLog("PaymentUC", "OnCashIn", "Modo Desarrollo: No se detienen periféricos", "", null);
 #else
+                // Modo Demo o Producción: Detener periféricos
                 await _peripherals.StopAceptance();
 #endif
 
@@ -134,6 +141,12 @@ namespace WPFApostar.UserControls.Chance
         }
         private void SendDispenseDetails(Dictionary<int, int> details, bool isReject = false)
         {
+            // Solo enviamos al API si NO estamos en modo Demo
+            if (Utilities.GetConfiguration("noPeripherals").Equals("true"))
+            {
+                return;
+            }
+
             var dpString = GetDetailsString(details, new[] { 2000, 10000, 50000 }, isReject ? "RJ" : "DP");
             var mdString = GetDetailsString(details, new[] { 200, 500 }, "MD");
 
