@@ -1,0 +1,10 @@
+﻿namespace WPFApostar.Domain.ApiService.ApostarIntegrationManager.ModelsApostar;
+
+public class TransactionDetailDto:DtoCommon
+{
+    public int IdTransaction { get; set; }
+    public int IdCurrencyDenomination { get; set; }
+    public int CurrencyDenomination { get; set; }
+    public int IdTypeOperation { get; set; }
+    public string TypeOperation { get; set; }
+}
