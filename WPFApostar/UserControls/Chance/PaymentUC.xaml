@@ -9,7 +9,7 @@
       >
 
     <Viewbox Stretch="Uniform">
-        <Grid Width="1080" Height="1920">
+        <Grid x:Name="MainGrid" Width="1080" Height="1920">
             <Grid.Background>
             <ImageBrush ImageSource="/Images/Backgrounds/bgGray.png"/>
         </Grid.Background>

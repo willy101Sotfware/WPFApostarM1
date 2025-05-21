@@ -160,10 +160,15 @@ namespace WPFApostar.UserControls.Recaudo
 
         private void Return(decimal returnValue)
         {
-
-            _peripherals.StartDispenser(returnValue);
-
-
+            if (!Utilities.GetConfiguration("noPeripherals").Equals("true"))
+            {
+                _peripherals.StartDispenser(returnValue);
+            }
+            else
+            {
+                // En modo prueba, simulamos que se dispensó todo el valor
+                OnCashDispensed(returnValue, new Dictionary<int, int>());
+            }
         }
 
 

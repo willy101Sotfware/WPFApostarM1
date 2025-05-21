@@ -8,7 +8,7 @@
       d:DesignHeight="1920" d:DesignWidth="1080">
 
     <Viewbox Stretch="Uniform">
-        <Grid Width="1080" Height="1920">
+        <Grid x:Name="MainGrid" Width="1080" Height="1920">
 
 
             <Grid.Background>

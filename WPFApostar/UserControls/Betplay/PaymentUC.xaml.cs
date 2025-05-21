@@ -29,16 +29,41 @@ namespace WPFApostar.UserControls.Betplay
 
         public PaymentUC(Transaction Ts)
         {
-
             AdminPayPlus.SaveLog("PaymentUserControl", "Entrando a la ejecucion", "OK", "", Transaction);
             InitializeComponent();
             Transaction = Ts;
 
             Transaction.DevueltaCorrecta = false;
 
+#if NO_PERIPHERALS
+            // En modo de prueba, agregamos botones de prueba
+            var testButton1 = new Button { Content = "1000", Width = 100, Height = 50, Margin = new Thickness(5) };
+            var testButton2 = new Button { Content = "2000", Width = 100, Height = 50, Margin = new Thickness(5) };
+            var testButton3 = new Button { Content = "5000", Width = 100, Height = 50, Margin = new Thickness(5) };
+            var testButton4 = new Button { Content = "10000", Width = 100, Height = 50, Margin = new Thickness(5) };
+            var testButton5 = new Button { Content = "20000", Width = 100, Height = 50, Margin = new Thickness(5) };
+            var testButton6 = new Button { Content = "50000", Width = 100, Height = 50, Margin = new Thickness(5) };
+
+            testButton1.Click += (s, e) => OnCashIn(1000);
+            testButton2.Click += (s, e) => OnCashIn(2000);
+            testButton3.Click += (s, e) => OnCashIn(5000);
+            testButton4.Click += (s, e) => OnCashIn(10000);
+            testButton5.Click += (s, e) => OnCashIn(20000);
+            testButton6.Click += (s, e) => OnCashIn(50000);
+
+            var testPanel = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Center };
+            testPanel.Children.Add(testButton1);
+            testPanel.Children.Add(testButton2);
+            testPanel.Children.Add(testButton3);
+            testPanel.Children.Add(testButton4);
+            testPanel.Children.Add(testButton5);
+            testPanel.Children.Add(testButton6);
+
+            MainGrid.Children.Add(testPanel);
+#else
             _peripherals = PeripheralController.Instance;
             _peripherals.CashIn += OnCashIn;
-
+#endif
 
             this.Unloaded += OnUnloaded;
             this.Loaded += OnLoaded;
@@ -53,27 +78,31 @@ namespace WPFApostar.UserControls.Betplay
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-
             OrganizeValues();
+
+#if NO_PERIPHERALS
+            // En modo de prueba, no necesitamos iniciar los periféricos
+            AdminPayPlus.SaveLog("PaymentUC", "OnLoaded", "Modo NO_PERIPHERALS: No se inician periféricos", "", null);
+#else
             _peripherals.StartAcceptance(paymentViewModel.PayValue);
+#endif
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
+#if NO_PERIPHERALS
+            // En modo de prueba, no necesitamos detener los periféricos
+            AdminPayPlus.SaveLog("PaymentUC", "OnUnloaded", "Modo NO_PERIPHERALS: No se detienen periféricos", "", null);
+#else
             _peripherals.CashIn -= OnCashIn;
-
-          
+#endif
         }
 
         private async void OnCashIn(decimal value)
         {
-
             paymentViewModel.ValorIngresado += value;
-
-
             paymentViewModel.RefreshListDenomination(Convert.ToInt32(value), 1);
             LoadView();
-
 
             AdminPayPlus.SaveLog("PaymentUserControl", "Entrando a la ejecucion OnCashIn  value ", value.ToString(), "", Transaction);
 
@@ -83,21 +112,22 @@ namespace WPFApostar.UserControls.Betplay
             // Llama al método con el tipo de operación correspondiente
             AdminPayPlus.SaveDetailsTransaction(Transaction.IdTransactionAPi, value, 2, 1, typeOperation, string.Empty);
 
-
-
             if (paymentViewModel.ValorIngresado >= paymentViewModel.PayValue)
             {
                 AdminPayPlus.SaveLog("PaymentUserControl", "Entrando a la ejecucion OnCashIn paymentViewModel.ValorIngresado >= paymentViewModel.PayValue", "OK", "", Transaction);
 
                 _ = Dispatcher.BeginInvoke((Action)delegate { btnCancell.Visibility = Visibility.Collapsed; });
 
+#if NO_PERIPHERALS
+                // En modo de prueba, no necesitamos detener los periféricos
+                AdminPayPlus.SaveLog("PaymentUC", "OnCashIn", "Modo NO_PERIPHERALS: No se detienen periféricos", "", null);
+#else
                 await _peripherals.StopAceptance();
+#endif
 
                 AdminPayPlus.SaveLog("PaymentUserControl", "Entrando a la ejecucion OnCashIn  StopAceptance entrando a Notify ", "OK", "", Transaction);
-
                 Notify();
             }
-
         }
 
       
