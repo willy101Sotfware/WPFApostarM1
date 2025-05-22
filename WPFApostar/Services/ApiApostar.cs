@@ -7,7 +7,8 @@ using WPFApostar.Domain.Enum;
 using WPFApostar.Domain.ModelsApostar;
 using WPFApostar.Domain.ApiService.QueueModels;
 using WPFApostar.Domain.UIServices;
-using WPFApostar.Services.Database;
+using WPFApostar.Classes.DB;
+using WPFApostar.Domain;
 
 namespace WPFApostar.Services;
 

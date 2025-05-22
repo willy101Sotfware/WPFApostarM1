@@ -1,9 +1,8 @@
 ﻿using System.IO.Ports;
-using WPFApostar.Classes;
-using HantleDispenserAPI;
+using WPFApostar.Classes.UseFull;
+using WPFApostar.Domain.Variables;
 
-namespace WPFApostar.Domain.Peripherals
-{
+namespace WPFApostar.Domain.Peripherals;
 
     internal static class ArduinoCommand
     {
@@ -21,16 +20,16 @@ namespace WPFApostar.Domain.Peripherals
     public delegate void CashDispensedHandler(decimal value, Dictionary<int, int> details);
     public delegate void DispenserRejectHandler(Dictionary<int, int> dataReject);
     public delegate void PeripheralErrorHandler(Exception ex);
-    public class PeripheralController
+    public class ArduinoController
     {
         // Patron de Diseño Singleton
-        private static PeripheralController _instance;
-        public static PeripheralController Instance
+        private static ArduinoController? _instance;
+        public static ArduinoController Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new PeripheralController();
+                    _instance = new ArduinoController();
 
                 return _instance;
             }
@@ -38,10 +37,10 @@ namespace WPFApostar.Domain.Peripherals
 
         public static void Initialize(string arduinoPort, string availDispenserDenom)
         {
-            PeripheralController pc = Instance;
+            ArduinoController pc = Instance;
             try
             {
-                pc._acceptorDevice = Utilities.GetConfiguration("acceptorDevice");
+                pc._acceptorDevice = AppConfig.Get("acceptorDevice");
 
                 pc._serialPort = new SerialPort();
                 pc.InitPort(arduinoPort);
@@ -60,37 +59,31 @@ namespace WPFApostar.Domain.Peripherals
             }
             catch (Exception ex)
             {
-                AdminPayPlus.SaveLog("PeripheralController " + "Initialize Catch " + $"Ocurrió un error en tiempo de ejecución: {ex.Message}" + ex);
+                EventLogger.SaveLog(EventType.Error, $"Ocurrió un error en tiempo de ejecución: {ex.Message}", ex);
                 throw;
             }
         }
 
         public static void Reset()
         {
-            if (_instance == null) return;
-
-            _instance._serialPort.Close();
-            _instance._mei.CloseAcceptor();
             _instance = null;
-            // Initialize peripherals ports and connections
-            string arduinoPort = Utilities.GetConfiguration("arduinoPort");
-            string dispenserDenominations = Utilities.GetConfiguration("dispenserDenominations");
-            Initialize(arduinoPort, dispenserDenominations);
         }
 
         /* ------ Atributos y metodos de clase ---------------*/
-        private PeripheralController() { }
+        private ArduinoController() { }
 
         #region Atributes
+        private const string _STR_TIMER = "01:00";
+        private TimerGeneric _timer;
 
         private SerialPort _serialPort;
 
         private MeiAcceptor _mei;
 
-        public event CashInHandler CashIn;
-        public event CashDispensedHandler CashDispensed;
-        public event DispenserRejectHandler DispenserReject;
-        public event PeripheralErrorHandler PeripheralError;
+        public event CashInHandler? CashIn;
+        public event CashDispensedHandler? CashDispensed;
+        public event DispenserRejectHandler? DispenserReject;
+        public event PeripheralErrorHandler? PeripheralError;
 
 
 
@@ -138,13 +131,7 @@ namespace WPFApostar.Domain.Peripherals
             PeripheralError?.Invoke(ex);
         }
 
-        public void ClearEvents()
-        {
-            CashDispensed = null;
-            CashIn = null;
-            PeripheralError = null;
-            DispenserReject = null;
-        }
+
 
         #endregion
 
@@ -171,7 +158,7 @@ namespace WPFApostar.Domain.Peripherals
             }
             catch (Exception ex)
             {
-                AdminPayPlus.SaveLog("PeripheralController " + "InitPort Catch " + $"Ocurrió un error en tiempo de ejecución: {ex.Message} " + ex);
+                EventLogger.SaveLog(EventType.Error, $"Ocurrió un error en tiempo de ejecución: {ex.Message}", ex);
                 throw;
             }
         }
@@ -182,7 +169,7 @@ namespace WPFApostar.Domain.Peripherals
             {
                 if (string.IsNullOrEmpty(values))
                 {
-                    AdminPayPlus.SaveLog("PeripheralController " + "SetDispenserDenoms " + $"No se enviaron las denominaciones disponibles. no se configuraron.");
+                    EventLogger.SaveLog(EventType.Error, $"No se enviaron las denominaciones disponibles. no se configuraron.");
                     return;
                 }
 
@@ -192,7 +179,7 @@ namespace WPFApostar.Domain.Peripherals
 
                 if (denominations.Length <= 0)
                 {
-                    AdminPayPlus.SaveLog("PeripheralController " + " SetDispenserDenoms " + $"No se enviaron las denominaciones disponibles con formato correcto, no se configuraron");
+                    EventLogger.SaveLog(EventType.Error, $"No se enviaron las denominaciones disponibles con formato correcto, no se configuraron");
                     return;
                 }
 
@@ -209,7 +196,7 @@ namespace WPFApostar.Domain.Peripherals
             }
             catch (Exception ex)
             {
-                AdminPayPlus.SaveLog("PeripheralController " + "SetDispenserDenoms Catch" + $"Ocurrió un error en tiempo de ejecución: {ex.Message} " + ex);
+                EventLogger.SaveLog(EventType.Error, $"Ocurrió un error en tiempo de ejecución: {ex.Message}", ex);
                 throw;
             }
         }
@@ -217,7 +204,7 @@ namespace WPFApostar.Domain.Peripherals
         /// <summary>
         /// Método que inicializa los billeteros
         /// </summary>
-        public async Task<bool> SendStart(bool ignoreDispenser = false)
+        public async Task<bool> SendStart()
         {
             try
             {
@@ -225,11 +212,8 @@ namespace WPFApostar.Domain.Peripherals
                 ArduinoToken = string.Empty;
 
                 _hAcceptorProcess = new HandlerAcceptorProcess();
-                if (!ignoreDispenser)
-                {
-                    if (!await Dispenser.Start())
-                        return false;
-                }
+                if (!await Dispenser.Start())
+                    return false;
 
                 if (!SendDataArduino(ArduinoCommand.START))
                 {
@@ -249,7 +233,7 @@ namespace WPFApostar.Domain.Peripherals
             }
             catch (Exception ex)
             {
-                AdminPayPlus.SaveLog("PeripheralController " + "SendStart Catch " + $"Ocurrió un error en tiempo de ejecución: {ex.Message} " + ex);
+                EventLogger.SaveLog(EventType.Error, $"Ocurrió un error en tiempo de ejecución: {ex.Message}", ex);
                 return false;
             }
         }
@@ -264,7 +248,7 @@ namespace WPFApostar.Domain.Peripherals
         {
             try
             {
-                AdminPayPlus.SaveLog("PeripheralController " + "SendDataArduino " + $"Enviando {message}...");
+                EventLogger.SaveLog(EventType.P_Arduino, $"Enviando {message}...");
 
                 if (!_serialPort.IsOpen) throw new Exception($"Se ha cerrado el puerto del arduino no se pudo enviar el comando {message}");
 
@@ -277,7 +261,7 @@ namespace WPFApostar.Domain.Peripherals
             }
             catch (Exception ex)
             {
-                AdminPayPlus.SaveLog("PeripheralController " + "SendDataArduino Catch " + $"Ocurrió un error en tiempo de ejecución: {ex.Message} " + ex);
+                EventLogger.SaveLog(EventType.P_Arduino, $"Ocurrió un error en tiempo de ejecución: {ex.Message}", ex);
                 return false;
             }
         }
@@ -296,7 +280,7 @@ namespace WPFApostar.Domain.Peripherals
 
                 string response = _serialPort.ReadLine();
 
-                AdminPayPlus.SaveLog("PeripheralController " + "ArduinoDataReceived " + $"Respuesta Recibida {response}...");
+                EventLogger.SaveLog(EventType.P_Arduino, $"Respuesta Recibida {response}...");
 
                 if (!string.IsNullOrEmpty(response))
                 {
@@ -305,7 +289,7 @@ namespace WPFApostar.Domain.Peripherals
             }
             catch (Exception ex)
             {
-                AdminPayPlus.SaveLog("PeripheralController " + "ArduinoDataReceived Catch" + $"Ocurrió un error en tiempo de ejecución: {ex.Message} " + ex);
+                EventLogger.SaveLog(EventType.P_Arduino, $"Ocurrió un error en tiempo de ejecución: {ex.Message}", ex);
             }
         }
         #endregion
@@ -345,11 +329,11 @@ namespace WPFApostar.Domain.Peripherals
         /// <param name="response">respuesta</param>
         private async void ProcessRC(string[] response)
         {
-            AdminPayPlus.SaveLog("PeripheralController " + "ProcessRC " + $"Procesando RC ({String.Join(":", response)})");
+            EventLogger.SaveLog(EventType.P_Arduino, $"Procesando RC ({String.Join(":", response)})");
 
             if (response[1] != "OK")
             {
-                AdminPayPlus.SaveLog("PeripheralController " + "ProcessRC " + "RC no arroja OK, no se ejecuta ninguna acción");
+                EventLogger.SaveLog(EventType.P_Arduino, "RC no arroja OK, no se ejecuta ninguna acción");
                 return;
             }
 
@@ -361,11 +345,11 @@ namespace WPFApostar.Domain.Peripherals
                     if (response[3] == "HD" && !string.IsNullOrEmpty(response[4]))
                     {
                         ArduinoToken = response[4].Replace("\r", string.Empty);
-                        AdminPayPlus.SaveLog("PeripheralController " + "ProcessRC DP" + $"RC Correcto token recibido: {ArduinoToken}");
+                        EventLogger.SaveLog(EventType.P_Arduino, $"RC Correcto token recibido: {ArduinoToken}");
 
                         if (_acceptorDevice == "MEI")
                         {
-                            if (!_mei.IsConnected) await _mei.OpenAcceptor(Utilities.GetConfiguration("PortAP"));
+                            if (!_mei.IsConnected) await _mei.OpenAcceptor(AppConfig.Get("meiPort"));
                             _peripheralStartSuccess = _mei.IsConnected;
                         }
                         else _peripheralStartSuccess = true;
@@ -386,13 +370,13 @@ namespace WPFApostar.Domain.Peripherals
         /// <param name="response">respuesta</param>
         private void ProcessER(string[] response)
         {
-            AdminPayPlus.SaveLog("PeripheralController " + "ProcessER " + $"Procesando ER ({String.Join(":", response)})");
+            EventLogger.SaveLog(EventType.P_Arduino, $"Procesando ER ({String.Join(":", response)})");
 
             if (response[1] == "DP" || response[1] == "MD")
             {
                 if (response[2].StartsWith("Abnormal Near End sensor"))
                 {
-                    AdminPayPlus.SaveLog("PeripheralController " + "ProcessER " + $"{response[2]}: Alguno de los baules de dispensación está quedandose sin billetes");
+                    EventLogger.SaveLog(EventType.P_Arduino, $"{response[2]}: Alguno de los baules de dispensación está quedandose sin billetes");
                     return;
                 }
 
@@ -403,7 +387,7 @@ namespace WPFApostar.Domain.Peripherals
                     this._arduinoErrDescription = response[2];
 
                 //Evaluar si es necesario invocar Peripheral Error para la inicialización
-                AdminPayPlus.SaveLog("PeripheralController " + "ProcessER " + $"Error dispensadores: {response[2]}");
+                EventLogger.SaveLog(EventType.P_Arduino, $"Error dispensadores: {response[2]}");
                 return;
             }
 
@@ -412,18 +396,18 @@ namespace WPFApostar.Domain.Peripherals
                 _arduinoStatusError = true;
                 if (this._hAcceptorProcess.LastError == response[2])
                     return;
-                AdminPayPlus.SaveLog("PeripheralController " + "ProcessER " + $"Error Aceptador Arduino: {response[2]}");
+                EventLogger.SaveLog(EventType.P_Arduino, $"Error Aceptador Arduino: {response[2]}");
                 PeripheralError?.Invoke(new Exception("Error Aceptador Arduino: " + response[2]));
                 return;
             }
             else if (response[1] == "FATAL")
             {
-                AdminPayPlus.SaveLog("PeripheralController " + "ProcessER " + $"Error Fatal Arduino: {response[2]}");
+                EventLogger.SaveLog(EventType.P_Arduino, $"Error Fatal Arduino: {response[2]}");
                 PeripheralError?.Invoke(new Exception("Error Fatal Arduino: " + response[2]));
                 return;
             }
 
-            AdminPayPlus.SaveLog("PeripheralController " + "ProcessER " + $"Error desconocido Arduino: {response[2]} no se tomó ninguna acción.");
+            EventLogger.SaveLog(EventType.P_Arduino, $"Error desconocido Arduino: {response[2]} no se tomó ninguna acción.");
         }
 
         /// <summary>
@@ -433,7 +417,7 @@ namespace WPFApostar.Domain.Peripherals
         private void ProcessUN(string[] response)
         {
 
-            AdminPayPlus.SaveLog("PeripheralController " + "ProcessUN " + $"Procesando UN ({String.Join(":", response)})");
+            EventLogger.SaveLog(EventType.P_Arduino, $"Procesando UN ({String.Join(":", response)})");
 
 
             switch (response[1])
@@ -460,11 +444,11 @@ namespace WPFApostar.Domain.Peripherals
         private void ProcessTO(string[] response)
         {
 
+            //TODO: Poner un ejemplo de las respuestas
 
+            EventLogger.SaveLog(EventType.P_Arduino, $"Procesando TO ({String.Join(":", response)})");
 
-            AdminPayPlus.SaveLog("PeripheralController " + "ProcessTO " + $"Procesando TO ({String.Join(":", response)})");
-
-            string responseFull = response[2]+":"+response[3];
+            string responseFull = response[2] + ":" + response[3];
 
             switch (response[1])
             {
@@ -493,7 +477,7 @@ namespace WPFApostar.Domain.Peripherals
             _deliveryAmount = 0;
             _enteredAmount = 0;
             DeliveryVal = 0;
-            _rawReturnCoins = "";
+            _rawReturnCoins = string.Empty;
             CashIn = null;
             CashDispensed = null;
             DispenserReject = null;
@@ -510,15 +494,12 @@ namespace WPFApostar.Domain.Peripherals
         {
             try
             {
-                AdminPayPlus.SaveLog("PeripheralController " + "StartDispenser " + "Iniciando dispensación");
+                EventLogger.SaveLog(EventType.P_Arduino, "Iniciando dispensación");
                 _arduinoStatusError = false;
                 _arduinoErrDescription = string.Empty;
                 _amountToDispense = valueDispenser;
 
-
-
                 await Dispenser.DispenseAmount((int)_amountToDispense);
-
                 DeliveryVal += Dispenser.DispensedValue;
                 DispenserReject?.Invoke(Dispenser.RejectData);
                 if (Dispenser.CoinsValue <= 0 || Dispenser.CoinsValue > 1900)
@@ -527,12 +508,13 @@ namespace WPFApostar.Domain.Peripherals
                     FinishDispensation();
                     return;
                 }
+
                 SendDispense(Dispenser.CoinsValue.ToString());
 
             }
             catch (Exception ex)
             {
-                AdminPayPlus.SaveLog("PeripheralController " + "StartDispenser Catch " + $"Ocurrió un error en tiempo de ejecución: {ex.Message} " + ex);
+                EventLogger.SaveLog(EventType.P_Arduino, $"Ocurrió un error en tiempo de ejecución: {ex.Message}", ex);
                 PeripheralError?.Invoke(ex);
 
             }
@@ -549,7 +531,7 @@ namespace WPFApostar.Domain.Peripherals
             try
             {
 
-                AdminPayPlus.SaveLog("PeripheralController " + "SendDispense " + $"Se enviará dispensación por valor de {valueToDispend}");
+                EventLogger.SaveLog(EventType.P_Arduino, $"Se enviará dispensación por valor de {valueToDispend}");
                 await Task.Delay(1000);
                 if (!string.IsNullOrEmpty(ArduinoToken))
                 {
@@ -558,11 +540,11 @@ namespace WPFApostar.Domain.Peripherals
                     return;
                 }
 
-                AdminPayPlus.SaveLog("PeripheralController " + "SendDispense " + $"No hay token. no se realizó ninguna acción.");
+                EventLogger.SaveLog(EventType.P_Arduino, $"No hay token. no se realizó ninguna acción.");
             }
             catch (Exception ex)
             {
-                AdminPayPlus.SaveLog("PeripheralController " + "SendDispense Catch " + $"Ocurrió un error en tiempo de ejecución: {ex.Message} " + ex);
+                EventLogger.SaveLog(EventType.P_Arduino, $"Ocurrió un error en tiempo de ejecución: {ex.Message}", ex);
                 PeripheralError?.Invoke(ex);
             }
         }
@@ -577,7 +559,7 @@ namespace WPFApostar.Domain.Peripherals
             try
             {
 
-                AdminPayPlus.SaveLog("PeripheralController " + "EvaluateDataDispenser " + $"Evaluando dato del dispensador {data}, Tipo = {typeTO}");
+                EventLogger.SaveLog(EventType.P_Arduino, $"Evaluando dato del dispensador {data}, Tipo = {typeTO}");
 
                 bool isCoinsReturn = data.Split(':')[0] == "MD";
                 string[] values = data.Split(':')[1].Split(';');
@@ -585,7 +567,7 @@ namespace WPFApostar.Domain.Peripherals
 
                 if (typeTO == "OK")
                 {
-                    _rawReturnCoins += data.Split(':')[1]+";";
+                    _rawReturnCoins += data.Split(":")[1] + ";";
                     foreach (var value in values)
                     {
                         int denominacion = Convert.ToInt32(value.Split('-')[0]);
@@ -605,7 +587,7 @@ namespace WPFApostar.Domain.Peripherals
             }
             catch (Exception ex)
             {
-                AdminPayPlus.SaveLog("PeripheralController " + "EvaluateDataDispenser Catch " + $"Ocurrió un error en tiempo de ejecución: {ex.Message} " + ex);
+                EventLogger.SaveLog(EventType.P_Arduino, $"Ocurrió un error en tiempo de ejecución: {ex.Message}", ex);
                 PeripheralError?.Invoke(ex);
             }
         }
@@ -617,11 +599,9 @@ namespace WPFApostar.Domain.Peripherals
             {
                 Dispenser.DispensedData.Add(Convert.ToInt32(denom), details[denom]);
             }
-            AdminPayPlus.SaveLog("PeripheralController " + " FinishDispensation" + $"Valor de devuelta total {DeliveryVal}");
+            EventLogger.SaveLog(EventType.P_Arduino, $"Valor de devuelta total {DeliveryVal}");
             CashDispensed?.Invoke(DeliveryVal, Dispenser.DispensedData);
-
             ClearValues();
-
         }
 
         #endregion
@@ -637,14 +617,14 @@ namespace WPFApostar.Domain.Peripherals
             {
                 _payValue = payValue;
                 bool isSuccess = false;
-                if (_acceptorDevice == "MEI") isSuccess =  _mei.EnableAcceptance();
+                if (_acceptorDevice == "MEI") isSuccess = _mei.EnableAcceptance();
                 else isSuccess = SendDataArduino(ArduinoCommand.JCM_ON);
 
                 if (!isSuccess) throw new Exception("No se pudo iniciar el aceptador. Respuesta negativa");
             }
             catch (Exception ex)
             {
-                AdminPayPlus.SaveLog("PeripheralController " + "StartAcceptance Catch " + $"Ocurrió un error en tiempo de ejecución: {ex.Message} " + ex);
+                EventLogger.SaveLog(EventType.P_Arduino, $"Ocurrió un error en tiempo de ejecución: {ex.Message}", ex);
                 PeripheralError?.Invoke(ex);
             }
         }
@@ -672,12 +652,12 @@ namespace WPFApostar.Domain.Peripherals
             {
                 if (string.IsNullOrEmpty(res)) res = "500-0;200-0;100-0";
                 if (res.Last() == ';') res = res.Substring(0, res.Length - 1);
-                var resDenoms = res.Split(';');
-                Dictionary<string, int> resDeserialized = new Dictionary<string, int>();
+                var resDenoms = res.Split(";");
+                Dictionary<string, int> resDeserialized = new();
                 foreach (var denom in resDenoms)
                 {
-                    var denomValue = denom.Split('-')[0];
-                    var quantity = Convert.ToInt32(denom.Split('-')[1]);
+                    var denomValue = denom.Split("-")[0];
+                    var quantity = Convert.ToInt32(denom.Split("-")[1]);
                     if (resDeserialized.ContainsKey(denomValue))
                         continue;
                     resDeserialized.Add(denomValue, quantity);
@@ -687,8 +667,8 @@ namespace WPFApostar.Domain.Peripherals
             }
             catch (Exception ex)
             {
-                AdminPayPlus.SaveLog("PeripheralController " + " DeserializeDispenserResponse Catch " + $"Ocurrió un error en tiempo de ejecución: {ex.Message}" + ex);
-                Dictionary<string, int> resDeserialized = new Dictionary<string, int>()
+                EventLogger.SaveLog(EventType.Error, $"Ocurrió un error en tiempo de ejecución: {ex.Message}", ex);
+                Dictionary<string, int> resDeserialized = new()
                 {
                     { "500", 0 },
                     { "200", 0 },
@@ -741,4 +721,4 @@ namespace WPFApostar.Domain.Peripherals
         }
 
     }
-}
+

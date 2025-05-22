@@ -1,4 +1,4 @@
-﻿using Dapper;
+﻿/*using Dapper;
 using System.Data;
 using System.Data.SQLite;
 using System.Reflection;
@@ -543,3 +543,4 @@ namespace WPFApostar.Classes.DB
         }
     }
 }
+*/
