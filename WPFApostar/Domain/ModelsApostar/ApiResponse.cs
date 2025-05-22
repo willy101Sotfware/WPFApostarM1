@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace WPFApostar.Domain.ApiService.ApostarIntegrationManager.ModelsApostar;
+namespace WPFApostar.Domain.ModelsApostar;
 
 public class ApiResponse<T>
 {

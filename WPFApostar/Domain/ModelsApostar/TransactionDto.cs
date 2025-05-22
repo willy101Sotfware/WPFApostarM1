@@ -1,4 +1,4 @@
-﻿namespace WPFApostar.Domain.ApiService.ApostarIntegrationManager.ModelsApostar;
+﻿namespace WPFApostar.Domain.ModelsApostar;
 
 public class TransactionDto : DtoCommon
 {

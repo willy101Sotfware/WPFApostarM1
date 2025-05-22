@@ -1,4 +1,4 @@
-﻿namespace WPFApostar.Domain.ApiService.ApostarIntegrationManager.Enum;
+﻿namespace WPFApostar.Domain.Enum;
 
 public enum StateTransaction
 {

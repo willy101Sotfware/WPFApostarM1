@@ -150,7 +150,7 @@ namespace WPFApostar.Classes
         VaLidarPaquete,
         ResumenPaquete,
         PaymentPaquetes,
-        SuccesRechatge,
+        SuccesPaquetes,
         FactureRec,
         FinishPaquetes,
         ReturnMoneyPaquetes

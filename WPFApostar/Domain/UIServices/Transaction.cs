@@ -1,7 +1,5 @@
-﻿
-
-using WPFApostar.Domain.ApiService.ApostarIntegrationManager.Enum;
-using WPFApostar.Domain.ApiService.ApostarIntegrationManager.ModelsApostar;
+﻿using WPFApostar.Domain.Enum;
+using WPFApostar.Domain.ModelsApostar;
 using WPFApostar.Domain.Recorder;
 using WPFApostar.ViewModel;
 
