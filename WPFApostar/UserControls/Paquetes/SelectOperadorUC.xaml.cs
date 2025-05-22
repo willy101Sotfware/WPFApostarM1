@@ -4,13 +4,13 @@ using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using WPFApostar.Classes.UseFull;
-using WPFApostar.Classes;
-using WPFApostar.Models;
-using WPFApostar.Services.ObjectIntegration;
+using WPFApostar.Domain.UseFull;
+using WPFApostar.Domain;
 using WPFApostar.ViewModel;
 using System.IO;
 using System.Windows;
+using WPFApostar.Domain.ApiService.Models;
+using WPFApostar.Domain.UIServices.ObjectIntegration;
 
 namespace WPFApostar.UserControls.Paquetes
 {

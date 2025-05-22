@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows;
-using WPFApostar.Classes;
+using WPFApostar.Domain;
 
 namespace WPFApostar
 {

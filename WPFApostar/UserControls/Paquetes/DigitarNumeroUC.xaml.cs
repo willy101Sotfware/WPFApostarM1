@@ -4,10 +4,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using WPFApostar.Classes;
-using WPFApostar.Classes.UseFull;
-using WPFApostar.Models;
+using WPFApostar.Domain;
+using WPFApostar.Domain.UseFull;
 using System.IO;
+using WPFApostar.Domain.ApiService.Models;
 
 namespace WPFApostar.UserControls.Paquetes
 {

@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using WPFApostar.Classes;
+using WPFApostar.Domain;
+using WPFApostar.Domain.ApiService.Models;
 using WPFApostar.Domain.Peripherals;
-using WPFApostar.Models;
 
 namespace WPFApostar.UserControls.Paquetes
 {

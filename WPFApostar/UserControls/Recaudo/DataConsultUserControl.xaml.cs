@@ -17,9 +17,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WPFApostar.Classes;
-using WPFApostar.Classes.UseFull;
-using WPFApostar.Models;
+using WPFApostar.Domain;
+using WPFApostar.Domain.UseFull;
+using WPFApostar.Domain.ApiService.Models;
 using WPFApostar.Resources;
 using WPFApostar.ViewModel;
 

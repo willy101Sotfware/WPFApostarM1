@@ -1,11 +1,12 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using WPFApostar.Classes;
+using WPFApostar.Domain;
+using WPFApostar.Domain.ApiService.Models;
 using WPFApostar.Domain.Peripherals;
-using WPFApostar.Models;
+using WPFApostar.Domain.UIServices;
+using WPFApostar.Domain.UIServices.ObjectIntegration;
 using WPFApostar.Resources;
-using WPFApostar.Services.ObjectIntegration;
 using WPFApostar.ViewModel;
 
 namespace WPFApostar.UserControls.Paquetes

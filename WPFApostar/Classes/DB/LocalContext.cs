@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 
-namespace WPFApostar.Classes.DB;
+namespace WPFApostar.Domain.DB;
 
 public class LocalContext : DbContext
 {

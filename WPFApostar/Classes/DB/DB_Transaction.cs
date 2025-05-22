@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace WPFApostar.Classes.DB
+namespace WPFApostar.Domain.DB
 {
     public class DB_Transaction
     {

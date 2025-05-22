@@ -2,13 +2,13 @@
 using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Data;
-using WPFApostar.Classes;
-using WPFApostar.Models;
+using WPFApostar.Domain;
 using System.IO;
-using LotteriesViewModel = WPFApostar.Models.LotteriesViewModel;
+using LotteriesViewModel = WPFApostar.Domain.ApiService.Models.LotteriesViewModel;
 using WPFApostar.Resources;
-using WPFApostar.Classes.UseFull;
+using WPFApostar.Domain.UseFull;
 using System.Windows.Input;
+using WPFApostar.Domain.ApiService.Models;
 
 namespace WPFApostar.UserControls.Chance
 {

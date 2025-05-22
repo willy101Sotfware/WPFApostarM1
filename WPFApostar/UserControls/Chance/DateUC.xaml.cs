@@ -8,12 +8,12 @@ using System.Windows.Data;
 using System.IO;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using WPFApostar.Classes;
-using WPFApostar.Models;
-using WPFApostar.Services.ObjectIntegration;
+using WPFApostar.Domain;
 using Path = System.IO.Path;
-using LotteriesViewModel = WPFApostar.Models.LotteriesViewModel;
-using WPFApostar.Classes.UseFull;
+using LotteriesViewModel = WPFApostar.Domain.ApiService.Models.LotteriesViewModel;
+using WPFApostar.Domain.UseFull;
+using WPFApostar.Domain.ApiService.Models;
+using WPFApostar.Domain.UIServices.ObjectIntegration;
 
 namespace WPFApostar.UserControls.Chance
 {

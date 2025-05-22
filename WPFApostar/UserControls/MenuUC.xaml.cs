@@ -2,10 +2,10 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WPFApostar.Classes;
-using WPFApostar.Classes.UseFull;
-using WPFApostar.Models;
-using WPFApostar.Services.ObjectIntegration;
+using WPFApostar.Domain;
+using WPFApostar.Domain.UseFull;
+using WPFApostar.Domain.ApiService.Models;
+using WPFApostar.Domain.UIServices.ObjectIntegration;
 
 namespace WPFApostar.UserControls
 {

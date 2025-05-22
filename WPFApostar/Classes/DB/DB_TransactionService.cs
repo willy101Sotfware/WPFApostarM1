@@ -1,5 +1,5 @@
 ﻿
-namespace WPFApostar.Classes.DB;
+namespace WPFApostar.Domain.DB;
 
 public static class DB_TransactionService
 {

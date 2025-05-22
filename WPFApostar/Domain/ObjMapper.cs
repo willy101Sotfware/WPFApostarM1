@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using WPFApostar.Classes.DB;
+using WPFApostar.Domain.DB;
 using WPFApostar.Domain.ModelsApostar;
 
 namespace WPFApostar.Domain;

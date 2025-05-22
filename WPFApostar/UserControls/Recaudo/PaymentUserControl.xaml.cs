@@ -3,11 +3,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using WPFApostar.Classes;
-using WPFApostar.Domain.Peripherals;
-using WPFApostar.Models;
+using WPFApostar.Domain.UIServices;
+using WPFApostar.Domain.UIServices.ObjectIntegration;
 using WPFApostar.Resources;
-using WPFApostar.Services.ObjectIntegration;
 using WPFApostar.ViewModel;
 
 namespace WPFApostar.UserControls.Recaudo
@@ -180,7 +178,7 @@ namespace WPFApostar.UserControls.Recaudo
             {
                 string mensaje = string.Concat("PaymentRecaudoUserControl", " ", "entrando a la ejecucion organizevalues", " ", "OK");
                 AdminPayPlus.SaveLog(mensaje);
-                //InitTimer();
+
 
                 this.paymentViewModel = new PaymentViewModel
                 {
@@ -401,7 +399,7 @@ namespace WPFApostar.UserControls.Recaudo
                     {
                         AdminPayPlus.SaveLog("PaymentRecaudoUserControl", "Respuesta null, navegando a return money ", "OK" + "Dinero ingresado es ", paymentViewModel.ValorIngresado.ToString(), Transaction);
                         Utilities.CloseModal();
-                        Transaction.StatePay = "Cancelada";
+                        Transaction.EstadoTransaccion = "Cancelada";
                         Transaction.Payment = paymentViewModel;
                         Utilities.ShowModal("Hubo un error al momento de notificar el pago se le hara devolucion de su dinero", EModalType.Error);
                         Utilities.navigator.Navigate(UserControlView.ReturnMoneyRe, Transaction);

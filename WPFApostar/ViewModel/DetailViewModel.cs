@@ -1,8 +1,8 @@
-﻿using WPFApostar.Classes;
-using WPFApostar.Models;
+﻿using WPFApostar.Domain;
 using System.Windows.Data;
 using System.ComponentModel;
 using System.Reflection;
+using WPFApostar.Domain.ApiService.Models;
 
 namespace WPFApostar.ViewModel
 {

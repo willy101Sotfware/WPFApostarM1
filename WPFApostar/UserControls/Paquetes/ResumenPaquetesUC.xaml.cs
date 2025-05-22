@@ -2,12 +2,12 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using WPFApostar.Classes;
-using WPFApostar.Classes.UseFull;
-using WPFApostar.Models;
+using WPFApostar.Domain;
+using WPFApostar.Domain.UseFull;
 using WPFApostar.Resources;
 using System.IO;
 using System.Windows.Input;
+using WPFApostar.Domain.ApiService.Models;
 
 namespace WPFApostar.UserControls.Paquetes
 {

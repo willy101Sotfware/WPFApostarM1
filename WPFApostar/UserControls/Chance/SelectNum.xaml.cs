@@ -4,10 +4,10 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WPFApostar.Classes;
-using WPFApostar.Classes.UseFull;
-using WPFApostar.Models;
-using WPFApostar.Services.ObjectIntegration;
+using WPFApostar.Domain;
+using WPFApostar.Domain.UseFull;
+using WPFApostar.Domain.ApiService.Models;
+using WPFApostar.Domain.UIServices.ObjectIntegration;
 
 namespace WPFApostar.UserControls.Chance
 {
@@ -36,7 +36,7 @@ namespace WPFApostar.UserControls.Chance
             }
             if (transaction.ListaChances == null)
             {
-                transaction.ListaChances = new List<Models.Chance>();
+                transaction.ListaChances = new List<Domain.ApiService.Models.Chance>();
             }
             if (transaction.Editar)
             {

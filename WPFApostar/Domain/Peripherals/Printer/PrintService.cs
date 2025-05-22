@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace WPFApostar.Domain.Peripherals.Printer
 {
-    internal class PrintService
-    {
-    }
-}
-namespace WPFINDER.Domain.Peripherals
-{
+
     public class PrintService
     {
-
         public static PrintCommands PrintCommands;
         private static PrinterCommandBuilder _printerCommandBuilder;
         private static bool builderStarter = false;
-        private static Action? _consultStateAfterPrinting;
+        private static Action _consultStateAfterPrinting;
         static PrintService()
         {
             PrintCommands = new PrintCommands(DefaultMarginSize.Default);
@@ -112,7 +103,7 @@ namespace WPFINDER.Domain.Peripherals
             return PrintCommands.PrintOnDirection(0, message);
         }
 
-        public static string BuildPrint(Dictionary<string, string?> header, Dictionary<string, string?> body, Dictionary<string, string?> footer)
+        public static string BuildPrint(Dictionary<string, string> header, Dictionary<string, string> body, Dictionary<string, string> footer)
         {
             string result = "";
             foreach (KeyValuePair<string, string> pair in header)
@@ -165,14 +156,14 @@ namespace WPFINDER.Domain.Peripherals
             }
         }
 
-        public static string PrepareRow(string[] values, int numberChars)
+        public static string PrepareRow(string[] values)
         {
             int numItems = values.Length;
-            int maxStringSize = numberChars / numItems;
+            int maxStringSize = 40 / numItems;
             var stringRow = new StringBuilder();
             for (int i = 0; i < numItems; i++)
             {
-                string valueToInsert = values[i].Substring(0, (maxStringSize - 2 > values[i].Length ? values[i].Length : maxStringSize - 2));
+                string valueToInsert = values[i].Substring(0, maxStringSize - 2 > values[i].Length ? values[i].Length : maxStringSize - 2);
                 while (valueToInsert.Length < maxStringSize - 2)
                 {
                     valueToInsert = $" {valueToInsert}";
@@ -345,7 +336,7 @@ namespace WPFINDER.Domain.Peripherals
         {
             var isConnected = ConfigurePrinter();
             if (!isConnected) return DefaultPrinterStatus.CantConnectToPrinter;
-            var status = PrintCommands.GetStatus();
+            var status = GetStatus();
             SetClose();
             if (!Enum.IsDefined(typeof(DefaultPrinterStatus), status)) return DefaultPrinterStatus.UndefinedInternalError;
             return (DefaultPrinterStatus)status;
@@ -398,7 +389,7 @@ namespace WPFINDER.Domain.Peripherals
                 SetHTseat(sb, totalCol - 1);
                 for (int i = 0; i < totalCol; i++)
                 {
-                    PrintString(new StringBuilder(colNames[i], colNames[i].Length), (i == totalCol - 1 ? 0 : 1));
+                    PrintString(new StringBuilder(colNames[i], colNames[i].Length), i == totalCol - 1 ? 0 : 1);
                     if (i == totalCol - 1) continue;
                     PrintNextHT();
                 }
@@ -406,7 +397,7 @@ namespace WPFINDER.Domain.Peripherals
                 {
                     for (int i = 0; i < totalCol; i++)
                     {
-                        PrintString(new StringBuilder(subArray[i], subArray[i].Length), (i == totalCol - 1 ? 0 : 1));
+                        PrintString(new StringBuilder(subArray[i], subArray[i].Length), i == totalCol - 1 ? 0 : 1);
                         if (i == totalCol - 1) continue;
                         PrintNextHT();
                     }
@@ -525,7 +516,7 @@ namespace WPFINDER.Domain.Peripherals
         {
             var isConnected = ConfigurePrinter();
             if (!isConnected) return 0;
-            var status = PrintCommands.GetStatusspecial();
+            var status = GetStatusspecial();
             SetClose();
             return status;
         }
@@ -636,4 +627,6 @@ namespace WPFINDER.Domain.Peripherals
         Default = 0
     }
 
+
+ 
 }

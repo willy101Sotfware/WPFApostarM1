@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using WPFApostar.Classes;
+using WPFApostar.Domain;
 using WPFApostar.Models;
 
 namespace WPFApostar

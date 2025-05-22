@@ -1,6 +1,5 @@
 ﻿
 using System.IO.Ports;
-using WPFApostar.Domain.Variables;
 
 namespace WPFApostar.Domain.Peripherals.Scanner;
 

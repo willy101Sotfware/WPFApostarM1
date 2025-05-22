@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using System.Windows.Controls;
-using WPFApostar.Classes;
+using WPFApostar.Domain;
 using WPFApostar.Resources;
 using WPFApostar.Services.Object;
 

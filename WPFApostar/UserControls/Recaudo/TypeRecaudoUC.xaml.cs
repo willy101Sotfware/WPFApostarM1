@@ -1,13 +1,13 @@
 ﻿using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WPFApostar.Classes;
-using WPFApostar.Classes.UseFull;
-using WPFApostar.Models;
+using WPFApostar.Domain;
+using WPFApostar.Domain.UseFull;
 using System.IO;
 using WPFApostar.ViewModel;
 using Path = System.IO.Path;
 using System.Collections.ObjectModel;
+using WPFApostar.Domain.ApiService.Models;
 
 namespace WPFApostar.UserControls.Recaudo
 {

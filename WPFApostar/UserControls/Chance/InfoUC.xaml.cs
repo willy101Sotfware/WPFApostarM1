@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
-using WPFApostar.Classes;
-using WPFApostar.Models;
+using WPFApostar.Domain;
+using WPFApostar.Domain.ApiService.Models;
 
 namespace WPFApostar.UserControls.Chance
 {

@@ -3,10 +3,10 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using WPFApostar.Classes;
-using WPFApostar.Models;
-using WPFApostar.Services.ObjectIntegration;
-using LotteriesViewModel = WPFApostar.Models.LotteriesViewModel;
+using WPFApostar.Domain;
+using WPFApostar.Domain.ApiService.Models;
+using WPFApostar.Domain.UIServices.ObjectIntegration;
+using LotteriesViewModel = WPFApostar.Domain.ApiService.Models.LotteriesViewModel;
 
 namespace WPFApostar.UserControls.Chance
 {

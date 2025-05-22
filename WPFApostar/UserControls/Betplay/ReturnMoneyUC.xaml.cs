@@ -1,8 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using WPFApostar.Classes;
-using WPFApostar.Domain.Peripherals;
-using WPFApostar.Models;
+using WPFApostar.Domain.UIServices;
+
 
 namespace WPFApostar.UserControls.Betplay
 {

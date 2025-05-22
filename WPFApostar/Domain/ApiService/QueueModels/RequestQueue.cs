@@ -1,7 +1,6 @@
 ﻿
 using System.Net.Http;
 using System.Net.Sockets;
-using WPFApostar.Domain.Variables;
 
 namespace WPFApostar.Domain.ApiService.QueueModels;
 
