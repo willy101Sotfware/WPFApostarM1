@@ -1,16 +1,15 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 
-
-namespace WPFApostar.Domain.Peripherals.Printer
+namespace WPFINDER.Domain.Peripherals
 {
-
     public class PrintService
     {
+
         public static PrintCommands PrintCommands;
         private static PrinterCommandBuilder _printerCommandBuilder;
         private static bool builderStarter = false;
-        private static Action _consultStateAfterPrinting;
+        private static Action? _consultStateAfterPrinting;
         static PrintService()
         {
             PrintCommands = new PrintCommands(DefaultMarginSize.Default);
@@ -103,7 +102,7 @@ namespace WPFApostar.Domain.Peripherals.Printer
             return PrintCommands.PrintOnDirection(0, message);
         }
 
-        public static string BuildPrint(Dictionary<string, string> header, Dictionary<string, string> body, Dictionary<string, string> footer)
+        public static string BuildPrint(Dictionary<string, string?> header, Dictionary<string, string?> body, Dictionary<string, string?> footer)
         {
             string result = "";
             foreach (KeyValuePair<string, string> pair in header)
@@ -156,14 +155,14 @@ namespace WPFApostar.Domain.Peripherals.Printer
             }
         }
 
-        public static string PrepareRow(string[] values)
+        public static string PrepareRow(string[] values, int numberChars)
         {
             int numItems = values.Length;
-            int maxStringSize = 40 / numItems;
+            int maxStringSize = numberChars / numItems;
             var stringRow = new StringBuilder();
             for (int i = 0; i < numItems; i++)
             {
-                string valueToInsert = values[i].Substring(0, maxStringSize - 2 > values[i].Length ? values[i].Length : maxStringSize - 2);
+                string valueToInsert = values[i].Substring(0, (maxStringSize - 2 > values[i].Length ? values[i].Length : maxStringSize - 2));
                 while (valueToInsert.Length < maxStringSize - 2)
                 {
                     valueToInsert = $" {valueToInsert}";
@@ -336,7 +335,7 @@ namespace WPFApostar.Domain.Peripherals.Printer
         {
             var isConnected = ConfigurePrinter();
             if (!isConnected) return DefaultPrinterStatus.CantConnectToPrinter;
-            var status = GetStatus();
+            var status = PrintCommands.GetStatus();
             SetClose();
             if (!Enum.IsDefined(typeof(DefaultPrinterStatus), status)) return DefaultPrinterStatus.UndefinedInternalError;
             return (DefaultPrinterStatus)status;
@@ -389,7 +388,7 @@ namespace WPFApostar.Domain.Peripherals.Printer
                 SetHTseat(sb, totalCol - 1);
                 for (int i = 0; i < totalCol; i++)
                 {
-                    PrintString(new StringBuilder(colNames[i], colNames[i].Length), i == totalCol - 1 ? 0 : 1);
+                    PrintString(new StringBuilder(colNames[i], colNames[i].Length), (i == totalCol - 1 ? 0 : 1));
                     if (i == totalCol - 1) continue;
                     PrintNextHT();
                 }
@@ -397,7 +396,7 @@ namespace WPFApostar.Domain.Peripherals.Printer
                 {
                     for (int i = 0; i < totalCol; i++)
                     {
-                        PrintString(new StringBuilder(subArray[i], subArray[i].Length), i == totalCol - 1 ? 0 : 1);
+                        PrintString(new StringBuilder(subArray[i], subArray[i].Length), (i == totalCol - 1 ? 0 : 1));
                         if (i == totalCol - 1) continue;
                         PrintNextHT();
                     }
@@ -516,7 +515,7 @@ namespace WPFApostar.Domain.Peripherals.Printer
         {
             var isConnected = ConfigurePrinter();
             if (!isConnected) return 0;
-            var status = GetStatusspecial();
+            var status = PrintCommands.GetStatusspecial();
             SetClose();
             return status;
         }
@@ -627,6 +626,4 @@ namespace WPFApostar.Domain.Peripherals.Printer
         Default = 0
     }
 
-
- 
 }

@@ -4,7 +4,7 @@ using System.Windows.Data;
 using WPFApostar.Domain;
 using WPFApostar.Domain.ApiService.Models;
 using WPFApostar.Domain.Peripherals;
-using WPFApostar.Domain.UIServices;
+using WPFApostar.Domain.UIServices.Integration;
 using WPFApostar.Domain.UIServices.ObjectIntegration;
 using WPFApostar.Resources;
 using WPFApostar.ViewModel;

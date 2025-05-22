@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using WPFApostar.Domain;
 using WPFApostar.Domain.ApiService.Models;
 using WPFApostar.Domain.Peripherals;
-using WPFApostar.Domain.UIServices;
+using WPFApostar.Domain.UIServices.Integration;
 
 namespace WPFApostar.UserControls.Chance
 {

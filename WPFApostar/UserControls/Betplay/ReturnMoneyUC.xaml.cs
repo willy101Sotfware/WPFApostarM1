@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using WPFApostar.Domain.UIServices;
+using WPFApostar.Domain.UIServices.Integration;
 
 
 namespace WPFApostar.UserControls.Betplay

@@ -1,4 +1,4 @@
-﻿
+
 using Newtonsoft.Json;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -38,7 +38,7 @@ namespace WPFApostar.Domain;
                 var json = JsonConvert.SerializeObject(evt, Formatting.Indented);
 
 
-                var logDir = Path.Combine(path1: Messages.APP_DIR, folder);
+                var logDir = Path.Combine(path1: AppInfo.APP_DIR, folder);
                 if (!Directory.Exists(logDir))
                 {
                     Directory.CreateDirectory(logDir);

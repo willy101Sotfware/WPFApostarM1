@@ -1,7 +1,7 @@
-﻿using MPOST;
+﻿
+using MPOST;
 
-namespace WPFApostar.Domain.Peripherals.Acceptor;
-
+namespace WPFApostar.Domain.Peripherals;
 
 public enum MeiMessages
 {

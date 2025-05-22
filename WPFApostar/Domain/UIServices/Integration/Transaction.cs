@@ -7,11 +7,11 @@ using WPFApostar.Domain.Peripherals.Recorder;
 using WPFApostar.Domain.UIServices.ObjectIntegration;
 using WPFApostar.ViewModel;
 
-namespace WPFApostar.Domain.UIServices;
+namespace WPFApostar.Domain.UIServices.Integration;
 public class Transaction
 {
     // Patron de Diseño Singleton
-    private static Transaction? _instance;
+    private static Transaction _instance;
     public static Transaction Instance
     {
         get
@@ -33,16 +33,16 @@ public class Transaction
     public int IdTransaccionApi { get; set; }
 
     public int IdPaypad { get; set; } = 3;
-    public string? TipoRecaudo { get; set; }
-    public string? TipoOperacion { get; set; }
+    public string TipoRecaudo { get; set; }
+    public string TipoOperacion { get; set; }
     public TypeTransaction TipoTransaccion { get; set; }
     public TypePayment TipoPago { get; set; }
     public StateTransaction EstadoTransaccion { get; set; }
     public string EstadoTransaccionVerb { get; set; }
-    public string? Referencia { get; set; }
-    public string? Documento { get; set; }
-    public string? Descripcion { get; set; }
-    public string? FechaVencimiento { get; set; }
+    public string Referencia { get; set; }
+    public string Documento { get; set; }
+    public string Descripcion { get; set; }
+    public string FechaVencimiento { get; set; }
     public decimal TotalSinRedondear { get; set; }
     public decimal Total { get; set; }
     public decimal TotalDevuelta { get; set; }
@@ -66,16 +66,6 @@ public class Transaction
 
     public string IdTipoPago { get; set; }
 
-    public InvoicePay DataInvoice { get; set; }
-
-    public List<InvoicePay> ListInvoices { get; set; } = new List<InvoicePay>();
-
-    public List<Invoice> ListaFacturas { get; set; } = new List<Invoice>();
-
-    public ResponseNotifyPay NotifyPay { get; set; }
-
-    public ResponseNotifyPay NotifyPayExc { get; set; }
-
 
 
 
@@ -85,7 +75,7 @@ public class Transaction
 
     public RequestDatafonoInfo Datafono { get; set; }
     // Grabación de video
-    public VideoRecorder? videoRecorder { get; set; }
+    public VideoRecorder videoRecorder { get; set; }
 
 
 }
@@ -112,7 +102,6 @@ public class RequestDatafonoInfo
 
     public string tramite { get; set; }
 
-    public ETypeTramites eTypeTramites { get; set; }
     public string Document { get; set; }
 
     public string TypeDocument { get; set; }
@@ -153,9 +142,7 @@ public class RequestDatafonoInfo
     public DateTime DateTransaction { get; set; }
 
     public string reference { get; set; }
-    public ETransactionType Tipo { get; set; }
 
-    public ETypeTramites Type { get; set; }
 
     public string StatePay { get; set; }
 
@@ -204,9 +191,6 @@ public class RequestDatafonoInfo
 
     public string IdProduct { get; set; }
 
-    public PAYER payer { get; set; }
-
-    public ETransactionState State { get; set; }
 
     public string Amount { get; set; }
     public decimal RealAmount { get; set; }

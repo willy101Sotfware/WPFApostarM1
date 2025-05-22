@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using WPFApostar.Domain.Peripherals.Dispenser;
+﻿using System.Windows;
+using WPFApostar.Domain;
 using WPFApostar.Domain.Variables;
 
-namespace WPFApostar.Domain.Peripherals.Dispenser;
-
+namespace HantleDispenserAPI
 {
     public static class Dispenser
     {
@@ -310,4 +304,10 @@ namespace WPFApostar.Domain.Peripherals.Dispenser;
     }
 
 
-
+}
+public class ErrorPrint
+{
+    public string Code { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+}

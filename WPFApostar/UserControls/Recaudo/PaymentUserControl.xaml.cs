@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using WPFApostar.Domain.UIServices;
+using WPFApostar.Domain.UIServices.Integration;
 using WPFApostar.Domain.UIServices.ObjectIntegration;
 using WPFApostar.Resources;
 using WPFApostar.ViewModel;

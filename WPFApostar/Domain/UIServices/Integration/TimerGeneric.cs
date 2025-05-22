@@ -1,12 +1,12 @@
 ﻿using System.Timers;
 
-namespace WPFApostar.Domain.UIServices;
+namespace WPFApostar.Domain.UIServices.Integration;
 
 public class TimerGeneric
 {
-    public Action<string>? CallBackTick;
-    public Action? CallBackTimeOut;
-    public Action? CallBackStop;
+    public Action<string> CallBackTick;
+    public Action CallBackTimeOut;
+    public Action CallBackStop;
 
     public int Minutes;
     public int Seconds;
@@ -37,7 +37,7 @@ public class TimerGeneric
         }
     }
 
-    private void TimerTick(object? sender, ElapsedEventArgs e)
+    private void TimerTick(object sender, ElapsedEventArgs e)
     {
         try
         {

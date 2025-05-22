@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.Net.Http;
 using System.Text;
-using WPFApostar.Domain.UIServices;
+using WPFApostar.Domain.UIServices.Integration;
 
 namespace WPFApostar.Domain.Peripherals.Recorder;
 

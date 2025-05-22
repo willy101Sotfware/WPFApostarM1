@@ -3,9 +3,9 @@ using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Text;
 using WPFApostar.Domain.Enum;
-using WPFApostar.Domain.UIServices;
 using WPFApostar.Domain.DB;
 using WPFApostar.Domain.ModelsApostar;
+using WPFApostar.Domain.UIServices.Integration;
 
 
 

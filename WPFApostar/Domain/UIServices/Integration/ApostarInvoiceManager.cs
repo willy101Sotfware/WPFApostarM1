@@ -1,14 +1,18 @@
-﻿using System.Net.Http;
+using System;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
+using WPFApostar.Domain.ApiService.QueueModels;
 using WPFApostar.Domain.UIServices.ObjectIntegration;
 
 namespace WPFApostar.Domain.UIServices.Integration
 {
     public class ApostarInvoiceManager : IProcedureManagerApsotar
     {
-        private readonly HttpClient _client;
-        private readonly string _baseAddress;
+        private HttpClient _client;
+        private string _baseAddress;
+        private readonly Transaction _ts;
 
         public ApostarInvoiceManager()
         {
@@ -17,91 +21,181 @@ namespace WPFApostar.Domain.UIServices.Integration
             _client.BaseAddress = new Uri(_baseAddress);
             _client.DefaultRequestHeaders.Add("DashboardKeyId", AppConfig.Get("apiKeyId"));
             _client.Timeout = TimeSpan.FromMilliseconds(10000);
+            _ts = Transaction.Instance;
         }
 
-        public async Task<ResponseGeneric> GetLotteries(RequestGetLotteries request)
+        private async Task<ResponseApi> GetData(object requestData, string controller)
         {
             try
             {
-                string payload = JsonConvert.SerializeObject(request);
+                string payload = JsonConvert.SerializeObject(requestData);
                 var content = new StringContent(payload, Encoding.UTF8, "Application/json");
-                var url = AppConfig.Get("GetLotteries");
+                var url = AppConfig.Get(controller);
 
                 var response = await _client.PostAsync(url, content);
                 var result = await response.Content.ReadAsStringAsync();
                 
-                return new ResponseGeneric
+                return new ResponseApi
                 {
-                    ResponseCode = response.IsSuccessStatusCode ? EResponseCode.Success : EResponseCode.Error,
-                    ResponseData = result,
-                    ResponseMessage = response.IsSuccessStatusCode ? "Success" : "Error"
+                    codeError = response.IsSuccessStatusCode ? 200 : 400,
+                    data = result,
+                    message = response.IsSuccessStatusCode ? "Success" : "Error"
                 };
+            }
+            catch (Exception ex)
+            {
+                EventLogger.SaveLog(EventType.Error, $"Error en GetData: {ex.Message}", ex);
+                return new ResponseApi
+                {
+                    codeError = 500,
+                    message = ex.Message
+                };
+            }
+        }
+
+        public async Task<ResponseApi> GetLotteries(RequestGetLotteries request)
+        {
+            try
+            {
+                var response = await GetData(request, "GetLotteries");
+                
+                if (response == null)
+                {
+                    EventLogger.SaveLog(EventType.Error, "Error en GetLotteries: respuesta nula");
+                    return new ResponseApi
+                    {
+                        codeError = 400,
+                        message = "Error en la consulta",
+                        data = null
+                    };
+                }
+                
+                if (response.codeError == 200)
+                {
+                    return new ResponseApi
+                    {
+                        codeError = 200,
+                        data = response.data,
+                        message = "Success"
+                    };
+                }
+                else
+                {
+                    EventLogger.SaveLog(EventType.Error, $"Error en GetLotteries: {response.message}");
+                    return new ResponseApi
+                    {
+                        codeError = 400,
+                        message = response.message,
+                        data = null
+                    };
+                }
             }
             catch (Exception ex)
             {
                 EventLogger.SaveLog(EventType.Error, "Error en GetLotteries", ex);
-                return new ResponseGeneric
+                return new ResponseApi
                 {
-                    ResponseCode = EResponseCode.Error,
-                    ResponseMessage = ex.Message
+                    codeError = 400,
+                    message = ex.Message,
+                    data = null
                 };
             }
         }
 
-        public async Task<ResponseGeneric> ValidateChance(RequestValidateChance request)
+        public async Task<ResponseApi> ValidateChance(RequestValidateChance request)
         {
             try
             {
-                string payload = JsonConvert.SerializeObject(request);
-                var content = new StringContent(payload, Encoding.UTF8, "Application/json");
-                var url = AppConfig.Get("ValidateChance");
+                var response = await GetData(request, "ValidateChance");
 
-                var response = await _client.PostAsync(url, content);
-                var result = await response.Content.ReadAsStringAsync();
-                
-                return new ResponseGeneric
+                if (response == null)
                 {
-                    ResponseCode = response.IsSuccessStatusCode ? EResponseCode.Success : EResponseCode.Error,
-                    ResponseData = result,
-                    ResponseMessage = response.IsSuccessStatusCode ? "Success" : "Error"
-                };
+                    EventLogger.SaveLog(EventType.Error, "Error en ValidateChance: respuesta nula");
+                    return new ResponseApi
+                    {
+                        codeError = 400,
+                        message = "Error en la consulta",
+                        data = null
+                    };
+                }
+
+                if (response.codeError == 200)
+                {
+                    return new ResponseApi
+                    {
+                        codeError = 200,
+                        data = response.data,
+                        message = "Success"
+                    };
+                }
+                else
+                {
+                    EventLogger.SaveLog(EventType.Error, $"Error en ValidateChance: {response.message}");
+                    return new ResponseApi
+                    {
+                        codeError = 400,
+                        message = response.message,
+                        data = null
+                    };
+                }
             }
             catch (Exception ex)
             {
                 EventLogger.SaveLog(EventType.Error, "Error en ValidateChance", ex);
-                return new ResponseGeneric
+                return new ResponseApi
                 {
-                    ResponseCode = EResponseCode.Error,
-                    ResponseMessage = ex.Message
+                    codeError = 400,
+                    message = ex.Message,
+                    data = null
                 };
             }
         }
 
-        public async Task<ResponseGeneric> SendAlert(RequestSendAlert request)
+        public async Task<ResponseApi> SendAlert(RequestSendAlert request)
         {
             try
             {
-                string payload = JsonConvert.SerializeObject(request);
-                var content = new StringContent(payload, Encoding.UTF8, "Application/json");
-                var url = AppConfig.Get("SendAlert");
+                var response = await GetData(request, "SendAlert");
 
-                var response = await _client.PostAsync(url, content);
-                var result = await response.Content.ReadAsStringAsync();
-                
-                return new ResponseGeneric
+                if (response == null)
                 {
-                    ResponseCode = response.IsSuccessStatusCode ? EResponseCode.Success : EResponseCode.Error,
-                    ResponseData = result,
-                    ResponseMessage = response.IsSuccessStatusCode ? "Success" : "Error"
-                };
+                    EventLogger.SaveLog(EventType.Error, "Error en SendAlert: respuesta nula");
+                    return new ResponseApi
+                    {
+                        codeError = 400,
+                        message = "Error al enviar alerta",
+                        data = null
+                    };
+                }
+
+                if (response.codeError == 200)
+                {
+                    return new ResponseApi
+                    {
+                        codeError = 200,
+                        data = response.data,
+                        message = "Success"
+                    };
+                }
+                else
+                {
+                    EventLogger.SaveLog(EventType.Error, $"Error en SendAlert: {response.message}");
+                    return new ResponseApi
+                    {
+                        codeError = 400,
+                        message = response.message,
+                        data = null
+                    };
+                }
             }
             catch (Exception ex)
             {
                 EventLogger.SaveLog(EventType.Error, "Error en SendAlert", ex);
-                return new ResponseGeneric
+                return new ResponseApi
                 {
-                    ResponseCode = EResponseCode.Error,
-                    ResponseMessage = ex.Message
+                    codeError = 400,
+                    message = ex.Message,
+                    data = null
                 };
             }
         }
@@ -110,14 +204,29 @@ namespace WPFApostar.Domain.UIServices.Integration
         {
             try
             {
-                string payload = JsonConvert.SerializeObject(request);
-                var content = new StringContent(payload, Encoding.UTF8, "Application/json");
-                var url = AppConfig.Get("SaveUser");
+                var response = await GetData(request, "SaveUser");
 
-                var response = await _client.PostAsync(url, content);
-                var result = await response.Content.ReadAsStringAsync();
-                
-                return JsonConvert.DeserializeObject<ResponseSavePayer>(result);
+                if (response == null)
+                {
+                    EventLogger.SaveLog(EventType.Error, "Error en SavePayer: respuesta nula");
+                    return new ResponseSavePayer
+                    {
+                        Estado = false
+                    };
+                }
+
+                if (response.codeError == 200)
+                {
+                    return JsonConvert.DeserializeObject<ResponseSavePayer>(response.data.ToString());
+                }
+                else
+                {
+                    EventLogger.SaveLog(EventType.Error, $"Error en SavePayer: {response.message}");
+                    return new ResponseSavePayer
+                    {
+                        Estado = false
+                    };
+                }
             }
             catch (Exception ex)
             {
@@ -133,14 +242,31 @@ namespace WPFApostar.Domain.UIServices.Integration
         {
             try
             {
-                string payload = JsonConvert.SerializeObject(request);
-                var content = new StringContent(payload, Encoding.UTF8, "Application/json");
-                var url = AppConfig.Get("ValidatePayForPayer");
+                var response = await GetData(request, "ValidatePayForPayer");
 
-                var response = await _client.PostAsync(url, content);
-                var result = await response.Content.ReadAsStringAsync();
-                
-                return JsonConvert.DeserializeObject<ResponseValidatePayer>(result);
+                if (response == null)
+                {
+                    EventLogger.SaveLog(EventType.Error, "Error en ValidatePayer: respuesta nula");
+                    return new ResponseValidatePayer
+                    {
+                        codeError = 500,
+                        message = "Error en la validación"
+                    };
+                }
+
+                if (response.codeError == 200)
+                {
+                    return JsonConvert.DeserializeObject<ResponseValidatePayer>(response.data.ToString());
+                }
+                else
+                {
+                    EventLogger.SaveLog(EventType.Error, $"Error en ValidatePayer: {response.message}");
+                    return new ResponseValidatePayer
+                    {
+                        codeError = 500,
+                        message = response.message
+                    };
+                }
             }
             catch (Exception ex)
             {
@@ -157,14 +283,31 @@ namespace WPFApostar.Domain.UIServices.Integration
         {
             try
             {
-                string payload = JsonConvert.SerializeObject(request);
-                var content = new StringContent(payload, Encoding.UTF8, "Application/json");
-                var url = AppConfig.Get("SavePayer");
+                var response = await GetData(request, "SavePayer");
 
-                var response = await _client.PostAsync(url, content);
-                var result = await response.Content.ReadAsStringAsync();
-                
-                return JsonConvert.DeserializeObject<ResponseInsertRecord>(result);
+                if (response == null)
+                {
+                    EventLogger.SaveLog(EventType.Error, "Error en InsertRecord: respuesta nula");
+                    return new ResponseInsertRecord
+                    {
+                        codeError = 500,
+                        message = "Error al insertar registro"
+                    };
+                }
+
+                if (response.codeError == 200)
+                {
+                    return JsonConvert.DeserializeObject<ResponseInsertRecord>(response.data.ToString());
+                }
+                else
+                {
+                    EventLogger.SaveLog(EventType.Error, $"Error en InsertRecord: {response.message}");
+                    return new ResponseInsertRecord
+                    {
+                        codeError = 500,
+                        message = response.message
+                    };
+                }
             }
             catch (Exception ex)
             {
@@ -181,14 +324,29 @@ namespace WPFApostar.Domain.UIServices.Integration
         {
             try
             {
-                string payload = JsonConvert.SerializeObject(request);
-                var content = new StringContent(payload, Encoding.UTF8, "Application/json");
-                var url = AppConfig.Get("ConsultSubproductosPaquetes");
+                var response = await GetData(request, "ConsultSubproductosPaquetes");
 
-                var response = await _client.PostAsync(url, content);
-                var result = await response.Content.ReadAsStringAsync();
-                
-                return JsonConvert.DeserializeObject<ResponseConsultSubproductosPaquetes>(result);
+                if (response == null)
+                {
+                    EventLogger.SaveLog(EventType.Error, "Error en ConsultSubproductosPaquetes: respuesta nula");
+                    return new ResponseConsultSubproductosPaquetes
+                    {
+                        Estado = false
+                    };
+                }
+
+                if (response.codeError == 200)
+                {
+                    return JsonConvert.DeserializeObject<ResponseConsultSubproductosPaquetes>(response.data.ToString());
+                }
+                else
+                {
+                    EventLogger.SaveLog(EventType.Error, $"Error en ConsultSubproductosPaquetes: {response.message}");
+                    return new ResponseConsultSubproductosPaquetes
+                    {
+                        Estado = false
+                    };
+                }
             }
             catch (Exception ex)
             {
@@ -204,14 +362,29 @@ namespace WPFApostar.Domain.UIServices.Integration
         {
             try
             {
-                string payload = JsonConvert.SerializeObject(request);
-                var content = new StringContent(payload, Encoding.UTF8, "Application/json");
-                var url = AppConfig.Get("ConsultarPaquetes");
+                var response = await GetData(request, "ConsultarPaquetes");
 
-                var response = await _client.PostAsync(url, content);
-                var result = await response.Content.ReadAsStringAsync();
-                
-                return JsonConvert.DeserializeObject<ResponseConsultPaquetes>(result);
+                if (response == null)
+                {
+                    EventLogger.SaveLog(EventType.Error, "Error en ConsultPaquetes: respuesta nula");
+                    return new ResponseConsultPaquetes
+                    {
+                        Estado = false
+                    };
+                }
+
+                if (response.codeError == 200)
+                {
+                    return JsonConvert.DeserializeObject<ResponseConsultPaquetes>(response.data.ToString());
+                }
+                else
+                {
+                    EventLogger.SaveLog(EventType.Error, $"Error en ConsultPaquetes: {response.message}");
+                    return new ResponseConsultPaquetes
+                    {
+                        Estado = false
+                    };
+                }
             }
             catch (Exception ex)
             {
@@ -227,14 +400,29 @@ namespace WPFApostar.Domain.UIServices.Integration
         {
             try
             {
-                string payload = JsonConvert.SerializeObject(request);
-                var content = new StringContent(payload, Encoding.UTF8, "Application/json");
-                var url = AppConfig.Get("GuardarPaquetes");
+                var response = await GetData(request, "GuardarPaquetes");
 
-                var response = await _client.PostAsync(url, content);
-                var result = await response.Content.ReadAsStringAsync();
-                
-                return JsonConvert.DeserializeObject<ResponseGuardarPaquetes>(result);
+                if (response == null)
+                {
+                    EventLogger.SaveLog(EventType.Error, "Error en GuardarPaquete: respuesta nula");
+                    return new ResponseGuardarPaquetes
+                    {
+                        Estado = false
+                    };
+                }
+
+                if (response.codeError == 200)
+                {
+                    return JsonConvert.DeserializeObject<ResponseGuardarPaquetes>(response.data.ToString());
+                }
+                else
+                {
+                    EventLogger.SaveLog(EventType.Error, $"Error en GuardarPaquete: {response.message}");
+                    return new ResponseGuardarPaquetes
+                    {
+                        Estado = false
+                    };
+                }
             }
             catch (Exception ex)
             {
@@ -250,14 +438,23 @@ namespace WPFApostar.Domain.UIServices.Integration
         {
             try
             {
-                string payload = JsonConvert.SerializeObject(request);
-                var content = new StringContent(payload, Encoding.UTF8, "Application/json");
-                var url = AppConfig.Get("GetTokenBetplay");
+                var response = await GetData(request, "GetTokenBetplay");
 
-                var response = await _client.PostAsync(url, content);
-                var result = await response.Content.ReadAsStringAsync();
-                
-                return JsonConvert.DeserializeObject<ResponseTokenBetplay>(result);
+                if (response == null)
+                {
+                    EventLogger.SaveLog(EventType.Error, "Error en GetTokenBetplay: respuesta nula");
+                    return new ResponseTokenBetplay();
+                }
+
+                if (response.codeError == 200)
+                {
+                    return JsonConvert.DeserializeObject<ResponseTokenBetplay>(response.data.ToString());
+                }
+                else
+                {
+                    EventLogger.SaveLog(EventType.Error, $"Error en GetTokenBetplay: {response.message}");
+                    return new ResponseTokenBetplay();
+                }
             }
             catch (Exception ex)
             {
@@ -270,14 +467,29 @@ namespace WPFApostar.Domain.UIServices.Integration
         {
             try
             {
-                string payload = JsonConvert.SerializeObject(request);
-                var content = new StringContent(payload, Encoding.UTF8, "Application/json");
-                var url = AppConfig.Get("GetProductsBetPlay");
+                var response = await GetData(request, "GetProductsBetPlay");
 
-                var response = await _client.PostAsync(url, content);
-                var result = await response.Content.ReadAsStringAsync();
-                
-                return JsonConvert.DeserializeObject<ResponseGetProducts>(result);
+                if (response == null)
+                {
+                    EventLogger.SaveLog(EventType.Error, "Error en ConsultSubproductBetplay: respuesta nula");
+                    return new ResponseGetProducts
+                    {
+                        Estado = false
+                    };
+                }
+
+                if (response.codeError == 200)
+                {
+                    return JsonConvert.DeserializeObject<ResponseGetProducts>(response.data.ToString());
+                }
+                else
+                {
+                    EventLogger.SaveLog(EventType.Error, $"Error en ConsultSubproductBetplay: {response.message}");
+                    return new ResponseGetProducts
+                    {
+                        Estado = false
+                    };
+                }
             }
             catch (Exception ex)
             {
@@ -293,14 +505,29 @@ namespace WPFApostar.Domain.UIServices.Integration
         {
             try
             {
-                string payload = JsonConvert.SerializeObject(request);
-                var content = new StringContent(payload, Encoding.UTF8, "Application/json");
-                var url = AppConfig.Get("NotifyPay");
+                var response = await GetData(request, "NotifyPay");
 
-                var response = await _client.PostAsync(url, content);
-                var result = await response.Content.ReadAsStringAsync();
-                
-                return JsonConvert.DeserializeObject<ResponseNotifyPayment>(result);
+                if (response == null)
+                {
+                    EventLogger.SaveLog(EventType.Error, "Error en NotifyPayment: respuesta nula");
+                    return new ResponseNotifyPayment
+                    {
+                        Estado = false
+                    };
+                }
+
+                if (response.codeError == 200)
+                {
+                    return JsonConvert.DeserializeObject<ResponseNotifyPayment>(response.data.ToString());
+                }
+                else
+                {
+                    EventLogger.SaveLog(EventType.Error, $"Error en NotifyPayment: {response.message}");
+                    return new ResponseNotifyPayment
+                    {
+                        Estado = false
+                    };
+                }
             }
             catch (Exception ex)
             {
@@ -310,66 +537,6 @@ namespace WPFApostar.Domain.UIServices.Integration
                     Estado = false
                 };
             }
-        }
-
-        public Task<ResponseGeneric> GetLotteries(RequestGetLotteries request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ResponseGeneric> ValidateChance(RequestValidateChance request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ResponseGeneric> SendAlert(RequestSendAlert request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ResponseSavePayer> SavePayer(RequestSavePayer request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ResponseValidatePayer> ValidatePayer(RequestValidatePayer request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ResponseInsertRecord> InsertRecord(RequestInsertRecord request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ResponseConsultSubproductosPaquetes> ConsultSubproductosPaquetes(RequestConsultSubproductosPaquetes request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ResponseConsultPaquetes> ConsultPaquetes(RequestConsultPaquetes request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ResponseGuardarPaquetes> GuardarPaquete(RequestGuardarPaquete request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ResponseTokenBetplay> GetTokenBetplay(RequesttokenBetplay request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ResponseGetProducts> ConsultSubproductBetplay(RequestConsultSubproductBetplay request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ResponseNotifyPayment> NotifyPayment(RequestNotifyRecaudo request)
-        {
-            throw new NotImplementedException();
         }
     }
 }
